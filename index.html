@@ -26,23 +26,25 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ld-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:3px;}
 .ld-sub{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px;}
 .ld-bar{width:180px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-top:16px;}
-.ld-bar-fill{height:100%;background:#4A7FE5;border-radius:2px;width:0%;transition:width .25s ease;}
+.ld-bar-fill{height:100%;background:linear-gradient(90deg,#4A7FE5,#2EC4B6);border-radius:2px;width:0%;transition:width .4s ease;}
 .ld-status{font-size:10px;color:rgba(255,255,255,.3);margin-top:10px;font-family:var(--mono);}
-.login-box{background:#151e2d;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:36px 32px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:fadeUp .3s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-.login-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
-.login-t{font-size:17px;font-weight:700;color:#fff;}
-.login-st{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
-.login-err{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F87171;border-radius:6px;padding:9px 12px;font-size:12px;margin-bottom:16px;display:none;}
+.login-box{background:#151e2d;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:40px 44px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.login-logo-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;}
+.login-logo-ico{width:40px;height:40px;background:linear-gradient(135deg,#4A7FE5,#2EC4B6);border-radius:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px rgba(79,142,229,.4);}
+.login-logo-ico svg{width:22px;height:22px;}
+.login-t{font-size:20px;font-weight:700;color:#fff;letter-spacing:2px;}
+.login-st{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:28px;margin-top:2px;}
+.login-err{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);color:#F87171;border-radius:6px;padding:9px 12px;font-size:12px;text-align:center;margin-bottom:14px;display:none;}
 .login-err.show{display:block;}
-.login-field{margin-bottom:15px;}
-.login-label{font-size:10px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;display:block;}
-.login-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;font-size:14px;color:#fff;font-family:var(--sans);outline:none;transition:border-color .15s;}
-.login-input:focus{border-color:rgba(74,127,229,.7);background:rgba(74,127,229,.05);}
-.login-input::placeholder{color:rgba(255,255,255,.2);}
-.login-btn{width:100%;padding:12px;background:#3B6FD4;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background .15s;margin-top:4px;}
-.login-btn:hover:not(:disabled){background:#5588E8;}
-.login-btn:disabled{opacity:.5;cursor:not-allowed;}
+.login-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.login-label{font-size:10px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;}
+.login-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:10px 13px;font-size:13px;color:#fff;font-family:var(--sans);outline:none;transition:border-color .15s;}
+.login-input:focus{border-color:rgba(74,127,229,.7);background:rgba(74,127,229,.06);}
+.login-input::placeholder{color:rgba(255,255,255,.18);}
+.login-btn{width:100%;padding:12px;background:linear-gradient(135deg,#4A7FE5,#2EC4B6);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .15s;margin-top:6px;box-shadow:0 4px 16px rgba(74,127,229,.35);}
+.login-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 24px rgba(74,127,229,.55);}
+.login-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 
 /* ── MAIN APP ── */
 #mainApp{display:none;flex-direction:column;height:100vh;overflow:hidden;}
@@ -185,7 +187,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ops-table td:last-child{border-right:none;}.ops-table tr:last-child td{border-bottom:none;}
 .ops-table tbody tr:hover td{background:var(--blue-light);}
 .sit-badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:600;}
-.sit-a{background:var(--amber-bg);color:var(--amber);}.sit-c{background:var(--green-bg);color:var(--green);}.sit-p{background:var(--blue-bg);color:var(--blue);}
+.sit-a{background:var(--amber-bg);color:var(--amber);}.sit-c{background:var(--green-bg);color:var(--green);}.sit-p{background:#d4f5e2;color:#1a7a45;}
 
 /* ── PEDIDOS SALVOS ── */
 .saved-layout{width:100%;padding:20px;overflow-y:auto;}
@@ -207,6 +209,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ctrl-card.cl-ok  {border-left-color:var(--green);}
 .ctrl-card.cl-warn{border-left-color:var(--amber);}
 .ctrl-card.cl-late{border-left-color:var(--red);}
+.ctrl-card.cl-done{border-left-color:#818CF8;opacity:.72;}
 .ctrl-header{padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .12s;}
 .ctrl-header:hover{background:var(--blue-light);}
 .ctrl-tog{font-size:10px;color:var(--tx3);flex-shrink:0;transition:transform .18s;}
@@ -218,7 +221,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ctrl-badge-warn{background:var(--amber-bg);color:var(--amber);}
 .ctrl-badge-late{background:var(--red-bg);color:var(--red);}
 .ctrl-badge-none{background:var(--bg);color:var(--tx3);border:1px solid var(--border);}
+.ctrl-badge-done{background:#EEF2FF;color:#4338CA;border:1px solid rgba(99,102,241,.25);}
 .ctrl-body{display:none;border-top:1px solid var(--border);overflow-x:auto;}
+.btn-finalizar{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--border2);background:var(--surface);color:var(--tx2);transition:all .15s;white-space:nowrap;font-family:var(--sans);}
+.btn-finalizar:hover{border-color:var(--green);color:var(--green);background:var(--green-bg);}
+.btn-finalizar.done{background:#EEF2FF;border-color:rgba(99,102,241,.4);color:#4338CA;}
+.btn-finalizar.done:hover{background:var(--red-bg);border-color:rgba(192,57,43,.3);color:var(--red);}
 
 /* ── ADMIN ── */
 .admin-layout{width:100%;padding:20px;overflow-y:auto;}
@@ -269,11 +277,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 
 <!-- LOADING -->
 <div id="loadingScreen">
-  <svg viewBox="0 0 36 36" width="56" height="56" style="margin-bottom:18px">
-    <path d="M18 2L33 11V25L18 34L3 25V11Z" fill="#4A7FE5" opacity=".18"/>
-    <path d="M18 7L28 13V23L18 29L8 23V13Z" fill="#4A7FE5" opacity=".45"/>
-    <circle cx="18" cy="18" r="5.5" fill="#4A7FE5"/>
-  </svg>
+  <div style="width:56px;height:56px;background:linear-gradient(135deg,#4A7FE5,#2EC4B6);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 0 40px rgba(74,127,229,.4);animation:ldPulse 2s ease infinite;">
+    <svg viewBox="0 0 22 22" width="28" height="28" fill="none" stroke="#fff" stroke-width="1.6">
+      <path d="M11 2L20 7V15L11 20L2 15V7L11 2Z"/>
+      <path d="M11 7L16 10V14L11 17L6 14V10L11 7Z"/>
+      <circle cx="11" cy="11" r="2" fill="#fff" stroke="none"/>
+    </svg>
+  </div>
+  <style>@keyframes ldPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}</style>
   <div class="ld-title">PCP · ALMOX</div>
   <div class="ld-sub">Extrator de Ordens de Produção</div>
   <div class="ld-bar"><div class="ld-bar-fill" id="ldFill"></div></div>
@@ -284,13 +295,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 <div id="loginScreen" style="display:none">
   <div class="login-box">
     <div class="login-logo-row">
-      <svg viewBox="0 0 36 36" width="38" height="38">
-        <path d="M18 2L33 11V25L18 34L3 25V11Z" fill="#4A7FE5" opacity=".2"/>
-        <path d="M18 7L28 13V23L18 29L8 23V13Z" fill="#4A7FE5" opacity=".5"/>
-        <circle cx="18" cy="18" r="5.5" fill="#4A7FE5"/>
-      </svg>
-      <div><div class="login-t">PCP · ALMOX</div><div class="login-st">Sistema de Produção</div></div>
+      <div class="login-logo-ico">
+        <svg viewBox="0 0 22 22" fill="none" stroke="#fff" stroke-width="1.6">
+          <path d="M11 2L20 7V15L11 20L2 15V7L11 2Z"/>
+          <path d="M11 7L16 10V14L11 17L6 14V10L11 7Z"/>
+          <circle cx="11" cy="11" r="2" fill="#fff" stroke="none"/>
+        </svg>
+      </div>
+      <div class="login-t">PCP · ALMOX</div>
     </div>
+    <div class="login-st">Sistema de Produção</div>
     <div class="login-err" id="loginErr"></div>
     <div class="login-field">
       <label class="login-label">Usuário</label>
@@ -350,11 +364,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
       <div class="sb-label">Pedido Detectado</div>
       <div class="pedido-num" id="pedidoNum">—</div>
       <div class="pedido-cli" id="pedidoCli">—</div>
-      <div id="pedidoFlag"></div>
-      <div style="margin-top:10px">
-        <div style="font-size:10px;font-weight:600;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Data de Entrega</div>
-        <input type="date" id="dataEntregaInput" class="date-input" title="Data de entrega do pedido">
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+        <div style="font-size:10px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Item / Sequência</div>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx2)" id="pedidoBaseDisp">—</span>
+          <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx3)">-</span>
+          <input type="text" id="pedidoItemInput" maxlength="10" placeholder="1"
+            style="width:54px;font-family:var(--mono);font-size:14px;font-weight:600;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue);border-radius:4px;padding:3px 7px;outline:none;text-align:center"
+            oninput="onPedidoItemChange()">
+        </div>
       </div>
+      <div id="pedidoFlag" style="margin-top:8px"></div>
     </div>
     <div class="sb-section">
       <div class="sb-label">Totalizadores</div>
@@ -446,7 +466,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
         <div style="font-size:11px;color:var(--tx3);margin-top:2px">
           <span style="color:var(--green);font-weight:600">●</span> &gt;30 dias &nbsp;
           <span style="color:var(--amber);font-weight:600">●</span> ≤14 dias &nbsp;
-          <span style="color:var(--red);font-weight:600">●</span> Atrasado
+          <span style="color:var(--red);font-weight:600">●</span> Atrasado &nbsp;
+          <span style="color:#818CF8;font-weight:600">●</span> Finalizado
         </div>
       </div>
       <button class="tb-btn" onclick="loadControle()">↺ Atualizar</button>
@@ -621,8 +642,10 @@ window.addEventListener('load',()=>{
     setTimeout(()=>{
       const sess=getSession();
       document.getElementById('loadingScreen').style.display='none';
-      if(isSessionValid(sess)){currentUser=sess;showMainApp();}
-      else{clearSession();document.getElementById('loginScreen').style.display='flex';}
+      try{
+        if(isSessionValid(sess)){currentUser=sess;showMainApp();}
+        else{clearSession();document.getElementById('loginScreen').style.display='flex';}
+      }catch(e){clearSession();document.getElementById('loginScreen').style.display='flex';}
     },350);
   },1100);
 });
@@ -632,7 +655,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementB
 function xlDate(v){
   if(v===''||v==null)return'';
   if(v instanceof Date)return v.toLocaleDateString('pt-BR');
-  const n=parseFloat(v);if(isNaN(n)||n<1)return String(v||'');
+  const s=String(v||'').trim();
+  if(/^0[0\/\-]/.test(s))return'';
+  const n=parseFloat(v);if(isNaN(n)||n<1)return s;
   return new Date(Math.round((n-25569)*86400000)).toLocaleDateString('pt-BR',{timeZone:'UTC'});
 }
 function xlTime(v){
@@ -698,11 +723,10 @@ async function handleFile(file){
       const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
       const ws=wb.Sheets[wb.SheetNames[0]];
       const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''}).map(r=>r.filter(c=>c?.toString().trim()).join('\t')).filter(r=>r.trim());
-      state=extractFromRows(rows);state.pedidoSeq=state.pedido;state.data_entrega='';
+      state=extractFromRows(rows);state.pedidoSeq=state.pedido;
       document.getElementById('fileTag').style.display='flex';document.getElementById('fileTagName').textContent=file.name;
       document.getElementById('pedidoPanel').style.display='block';document.getElementById('pedidoNum').textContent='...';
       document.getElementById('pedidoCli').textContent=state.cliente||'—';document.getElementById('filterBar').style.display='flex';
-      document.getElementById('dataEntregaInput').value='';
       await checkExisting();renderResult();
       const tot=state.componentes.reduce((s,c)=>s+(c.operacoes?.length||0),0);
       toast(`Extraídos: ${state.componentes.length} itens · ${tot} operações`,'success');
@@ -713,22 +737,34 @@ async function handleFile(file){
 
 async function checkExisting(){
   if(!state.pedido)return;
+  document.getElementById('pedidoNum').textContent=state.pedido;
+  document.getElementById('pedidoBaseDisp').textContent=state.pedido;
   try{
     const data=await dbGet('pedidos',`select=id,numero&numero=like.${state.pedido}-%&order=numero.asc`);
     const exact=await dbGet('pedidos',`select=id,numero&numero=eq.${state.pedido}&limit=1`);
     const todos=[...(exact||[]),...(data||[])];
-    if(!todos.length){
-      existingPedidoId=null;state.pedidoSeq=state.pedido+'-1';setFlag('novo');
-      document.getElementById('statusBadge').textContent='NOVO PEDIDO';document.getElementById('statusBadge').className='status-badge ok';
-    }else{
-      existingPedidoId=null;let maxSeq=0;
-      todos.forEach(p=>{const m=p.numero.match(/-(\d+)$/);maxSeq=Math.max(maxSeq,m?parseInt(m[1]):1);});
-      state.pedidoSeq=state.pedido+'-'+(maxSeq+1);setFlag('seq');
-      document.getElementById('statusBadge').textContent='SEQUÊNCIA '+(maxSeq+1);document.getElementById('statusBadge').className='status-badge warn';
-    }
-    document.getElementById('pedidoNum').textContent=state.pedidoSeq;document.getElementById('saveBtn').disabled=false;
-  }catch(e){existingPedidoId=null;state.pedidoSeq=state.pedido+'-1';document.getElementById('saveBtn').disabled=false;setFlag('novo');}
+    let sugItem='1';
+    if(todos.length){let max=0;todos.forEach(p=>{const m=p.numero.match(/-(\d+)$/);max=Math.max(max,m?parseInt(m[1]):1);});sugItem=String(max+1);}
+    document.getElementById('pedidoItemInput').value=sugItem;
+    existingPedidoId=null;state.pedidoSeq=state.pedido+'-'+sugItem;
+    setFlag('novo');document.getElementById('statusBadge').textContent='Nº '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
+    document.getElementById('saveBtn').disabled=false;
+  }catch(e){
+    document.getElementById('pedidoItemInput').value='1';
+    existingPedidoId=null;state.pedidoSeq=state.pedido+'-1';
+    document.getElementById('saveBtn').disabled=false;setFlag('novo');
+  }
 }
+function onPedidoItemChange(){
+  const val=document.getElementById('pedidoItemInput').value.trim();
+  if(!state.pedido)return;
+  state.pedidoSeq=val?state.pedido+'-'+val:state.pedido;
+  setFlag('novo');
+  document.getElementById('statusBadge').textContent='Nº '+state.pedidoSeq;
+  document.getElementById('statusBadge').className='status-badge ok';
+  renderResult();
+}
+
 function setFlag(t){
   const el=document.getElementById('pedidoFlag');
   if(t==='novo')el.innerHTML=`<span class="pedido-flag flag-novo">✓ NOVO · ${state.pedidoSeq}</span>`;
@@ -742,15 +778,32 @@ async function executeSave(){
   const pw=document.getElementById('progressWrap'),pf=document.getElementById('progressFill'),pl=document.getElementById('progressLabel');
   pw.style.display='block';pf.style.width='0%';
   try{
-    const dataEntrega=document.getElementById('dataEntregaInput').value||null;
-    pl.textContent='Criando pedido '+state.pedidoSeq+'...';
-    const np=await dbPost('pedidos',{numero:state.pedidoSeq,cliente:state.cliente,data_importacao:new Date().toISOString(),data_entrega:dataEntrega});
-    const pedidoId=np[0].id;pf.style.width='10%';
+    const datas=state.componentes.filter(c=>c.data_entrega).map(c=>c.data_entrega).sort();
+    const minDate=datas.length?datas[0]:null;
     const total=state.componentes.length;
+
+    if(existingPedidoId){
+      pl.textContent='Atualizando datas...';
+      await dbPatch('pedidos',`id=eq.${existingPedidoId}`,{data_entrega:minDate,data_atualizacao:new Date().toISOString()});
+      for(let i=0;i<total;i++){
+        const comp=state.componentes[i];
+        pl.textContent=`Atualizando item ${i+1} de ${total}...`;pf.style.width=(10+Math.round((i/total)*85))+'%';
+        if(comp.id) await dbPatch('componentes',`id=eq.${comp.id}`,{data_entrega:comp.data_entrega||null});
+      }
+      pf.style.width='100%';pl.textContent='Datas atualizadas!';setTimeout(()=>{pw.style.display='none';},1500);
+      btn.textContent='✓ Atualizado!';
+      document.getElementById('statusBadge').textContent='ATUALIZADO · '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
+      toast(`Datas do pedido ${state.pedidoSeq} atualizadas!`,'success');
+      return;
+    }
+
+    pl.textContent='Criando pedido '+state.pedidoSeq+'...';
+    const np=await dbPost('pedidos',{numero:state.pedidoSeq,cliente:state.cliente,data_importacao:new Date().toISOString(),data_entrega:minDate});
+    const pedidoId=np[0].id;pf.style.width='10%';
     for(let i=0;i<total;i++){
       const comp=state.componentes[i];
       pl.textContent=`Salvando item ${i+1} de ${total}...`;pf.style.width=(10+Math.round((i/total)*85))+'%';
-      const nc=await dbPost('componentes',{pedido_id:pedidoId,posicao:comp.posicao,codigo:comp.codigo,descricao:comp.descricao,desenho:comp.desenho,quantidade:parseFloat(comp.quantidade)||0,unidade:'PC'});
+      const nc=await dbPost('componentes',{pedido_id:pedidoId,posicao:comp.posicao,codigo:comp.codigo,descricao:comp.descricao,desenho:comp.desenho,quantidade:parseFloat(comp.quantidade)||0,unidade:'PC',data_entrega:comp.data_entrega||null});
       const compId=nc[0].id;
       if(comp.operacoes?.length){
         await dbPost('operacoes',comp.operacoes.map(op=>({componente_id:compId,pedido_id:pedidoId,est:op.est,seq:op.seq,operacao:op.op,descricao:op.desc,qtd_prevista:parseFloat(op.qtd_prev)||0,qtd_realizada:parseFloat(op.qtd_real)||0,inicio_data:op.inicio_data||null,inicio_hora:op.inicio_hora||null,situacao:op.situacao||'Aberta'})));
@@ -768,9 +821,9 @@ async function executeSave(){
 
 function getUltimaOp(ops){
   if(!ops?.length)return{label:'—',cls:'op-none'};
-  const em=ops.find(o=>/anda|prog|exec|proc/i.test(o.situacao||''));if(em)return{label:em.desc||em.op,cls:'op-andamento'};
   const conc=ops.filter(o=>/concl|finaliz/i.test(o.situacao||''));
   if(conc.length){const last=conc.sort((a,b)=>parseInt(b.seq)-parseInt(a.seq))[0];return{label:last.desc||last.op,cls:'op-concluida'};}
+  const em=ops.find(o=>o.inicio_data&&o.inicio_hora);if(em)return{label:em.desc||em.op,cls:'op-andamento'};
   return{label:ops[0].desc||ops[0].op,cls:'op-aberta'};
 }
 
@@ -791,13 +844,9 @@ function renderResult(){
   document.getElementById('statComp').textContent=state.componentes.length;document.getElementById('statOps').textContent=totalOps;
   document.getElementById('toolbarInfo').innerHTML=`<strong>Pedido ${state.pedidoSeq||'—'}</strong> · ${state.componentes.length} itens · ${totalOps} ops · mostrando <strong>${filtered.length}</strong>`;
   if(!filtered.length){area.innerHTML=`<div class="empty-state" style="height:300px"><div class="empty-title">Nenhum item encontrado</div></div>`;return;}
-  const dataEntrega=document.getElementById('dataEntregaInput').value;
-  const eCls=entregaCls(dataEntrega);
-  const eLabel=dataEntrega?`<span class="entrega-badge entrega-${eCls}">${fmtDate(dataEntrega)}</span>`:`<span style="color:var(--tx3);font-size:11px">—</span>`;
   let html=`<div class="pedido-header">
     <div class="ph-item"><div class="ph-lbl">Pedido</div><div class="ph-val">${state.pedidoSeq||'—'}</div></div>
     <div class="ph-item"><div class="ph-lbl">Cliente</div><div class="ph-val">${state.cliente||'—'}</div></div>
-    <div class="ph-item"><div class="ph-lbl">Entrega</div><div class="ph-val">${dataEntrega?fmtDate(dataEntrega):'—'}</div></div>
     <div class="ph-item"><div class="ph-lbl">Itens</div><div class="ph-val">${state.componentes.length}</div></div>
     <div class="ph-item"><div class="ph-lbl">Operações</div><div class="ph-val">${totalOps}</div></div>
     <div class="ph-actions"><button class="ph-btn" onclick="expandAll()">▼ Expandir tudo</button><button class="ph-btn" onclick="collapseAll()">▶ Recolher tudo</button></div>
@@ -809,10 +858,12 @@ function renderResult(){
   </div>`;
   filtered.forEach((comp,idx)=>{
     const isLast=idx===filtered.length-1;
+    const compIdx=state.componentes.indexOf(comp);
     const opsHtml=comp.operacoes?.length?comp.operacoes.map(op=>{
-      const s=(op.situacao||'').toLowerCase();let cls='sit-a';
-      if(/concl|finaliz/i.test(s))cls='sit-c';else if(/anda|prog|exec|proc/i.test(s))cls='sit-p';
-      return`<tr><td>${op.est||'—'}</td><td>${op.seq||'—'}</td><td>${op.op||'—'}</td><td>${op.desc||'—'}</td><td>${op.qtd_prev||'—'}</td><td>${op.qtd_real||'—'}</td><td>${op.inicio_data?op.inicio_data+' '+op.inicio_hora:'—'}</td><td><span class="sit-badge ${cls}">${op.situacao||'Aberta'}</span></td></tr>`;
+      const s=(op.situacao||'').toLowerCase();let cls='sit-a',sitLabel='Aberta';
+      if(/concl|finaliz/i.test(s)){cls='sit-c';sitLabel='Concluída';}
+      else if(op.inicio_data&&op.inicio_hora){cls='sit-p';sitLabel='Em Processo';}
+      return`<tr><td>${op.est||'—'}</td><td>${op.seq||'—'}</td><td>${op.op||'—'}</td><td>${op.desc||'—'}</td><td>${op.qtd_prev||'—'}</td><td>${op.qtd_real||'—'}</td><td>${op.inicio_data?op.inicio_data+' '+op.inicio_hora:'—'}</td><td><span class="sit-badge ${cls}">${sitLabel}</span></td></tr>`;
     }).join(''):`<tr><td colspan="8" style="padding:12px;text-align:center;color:var(--tx3);font-size:11px">Sem operações</td></tr>`;
     const qty=comp.quantidade?parseFloat(comp.quantidade)%1===0?parseInt(comp.quantidade):parseFloat(comp.quantidade):'—';
     const ultima=getUltimaOp(comp.operacoes);
@@ -823,7 +874,7 @@ function renderResult(){
         <div class="cr-cell cr-desc">${comp.descricao}</div>
         <div class="cr-cell cr-atual">${ultima.cls==='op-none'?`<span class="op-none">—</span>`:`<span class="op-badge ${ultima.cls}">${ultima.label}</span>`}</div>
         <div class="cr-cell cr-desenho">${comp.desenho||'—'}</div>
-        <div class="cr-cell" style="align-items:center">${eLabel}</div>
+        <div class="cr-cell" style="align-items:center"><input type="date" class="inline-date${comp.data_entrega?' date-'+entregaCls(comp.data_entrega):''}" value="${comp.data_entrega||''}" onchange="updateCompDate(${compIdx},this.value)" onclick="event.stopPropagation()" title="${comp.data_entrega?fmtDate(comp.data_entrega):'Sem prazo'}"></div>
         <div class="cr-cell cr-qty">${qty}</div>
         <div class="cr-cell cr-ops"><span class="tog" id="tog-${idx}">▶</span> ${comp.operacoes?.length||0}</div>
       </div>
@@ -842,6 +893,7 @@ function collapseAll(){document.querySelectorAll('.ops-wrap').forEach(el=>el.cla
 function setFilter(mode,el){filterMode=mode;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderResult();}
 function toggleOp(op,el){if(activeOps.has(op)){activeOps.delete(op);el.classList.remove('active');}else{activeOps.add(op);el.classList.add('active');}renderResult();}
 function applyFilter(){searchTerm=document.getElementById('searchInput').value;renderResult();}
+function updateCompDate(idx,val){if(state.componentes[idx])state.componentes[idx].data_entrega=val||'';}
 
 // ── PEDIDOS SALVOS ────────────────────────────────────────────────────────────
 async function loadSavedCount(){try{const d=await dbGet('pedidos','select=id');document.getElementById('savedCount').textContent=d?.length||0;}catch(e){}}
@@ -850,26 +902,23 @@ async function loadSavedList(){
   const area=document.getElementById('savedListArea');
   area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Carregando...</div></div>';
   try{
-    const pedidos=await dbGet('pedidos','select=id,numero,cliente,data_entrega,data_importacao,data_atualizacao&order=data_importacao.desc');
+    const pedidos=await dbGet('pedidos','select=id,numero,cliente,data_entrega,data_importacao,data_atualizacao,finalizado,componentes(count),operacoes(count)&order=data_importacao.desc');
     if(!pedidos?.length){area.innerHTML='<div class="empty-state" style="height:300px"><div class="empty-title">Nenhum pedido salvo</div></div>';return;}
-    const comps=await dbGet('componentes','select=pedido_id');const ops=await dbGet('operacoes','select=pedido_id');
-    const ccMap={},ocMap={};
-    (comps||[]).forEach(r=>{ccMap[r.pedido_id]=(ccMap[r.pedido_id]||0)+1;});
-    (ops||[]).forEach(r=>{ocMap[r.pedido_id]=(ocMap[r.pedido_id]||0)+1;});
     let html=`<table class="saved-table"><thead><tr><th>Nº Pedido</th><th>Cliente</th><th>Entrega</th><th>Itens</th><th>Operações</th><th>Importado em</th><th>Ações</th></tr></thead><tbody>`;
     pedidos.forEach(p=>{
       const dt=p.data_importacao?new Date(p.data_importacao).toLocaleString('pt-BR'):'—';
       const cli=(p.cliente||'').replace(/'/g,"\\'");
+      const fin=!!p.finalizado;
       const eCls=entregaCls(p.data_entrega);
-      const eBadge=p.data_entrega?`<span class="entrega-badge entrega-${eCls}">${fmtDate(p.data_entrega)}</span>`:'—';
-      html+=`<tr>
+      const eBadge=fin?`<span class="entrega-badge" style="background:#EEF2FF;color:#4338CA;border:1px solid rgba(99,102,241,.25)">✓ Concluído</span>`:p.data_entrega?`<span class="entrega-badge entrega-${eCls}">${fmtDate(p.data_entrega)}</span>`:'—';
+      html+=`<tr${fin?' style="opacity:.72"':''}>
         <td class="mono" style="font-weight:600;color:var(--blue)">${p.numero}</td>
         <td>${p.cliente||'—'}</td><td>${eBadge}</td>
-        <td class="mono">${ccMap[p.id]||0}</td><td class="mono">${ocMap[p.id]||0}</td>
+        <td class="mono">${p.componentes?.[0]?.count??0}</td><td class="mono">${p.operacoes?.[0]?.count??0}</td>
         <td class="mono" style="color:var(--tx2);font-size:11px">${dt}</td>
         <td><div style="display:flex;gap:6px">
           <button class="icon-btn" onclick="viewSavedPedido('${p.id}','${p.numero}','${cli}','${p.data_entrega||''}')">👁 Ver</button>
-          <button class="icon-btn danger" onclick="deletePedido('${p.id}','${p.numero}')">🗑 Remover</button>
+          <button class="icon-btn${fin?'':' danger'}" onclick="deletePedido('${p.id}','${p.numero}')">🗑 Remover</button>
         </div></td>
       </tr>`;
     });
@@ -883,12 +932,17 @@ async function viewSavedPedido(id,numero,cliente,dataEntrega){
     const comps=await dbGet('componentes',`select=*&pedido_id=eq.${id}&order=posicao`);
     const ops=await dbGet('operacoes',`select=*&pedido_id=eq.${id}`);
     const opsMap={};(ops||[]).forEach(o=>{if(!opsMap[o.componente_id])opsMap[o.componente_id]=[];opsMap[o.componente_id].push(o);});
-    const componentes=(comps||[]).map(c=>({posicao:c.posicao,codigo:c.codigo,descricao:c.descricao,desenho:c.desenho,quantidade:c.quantidade,operacoes:(opsMap[c.id]||[]).map(o=>({est:o.est,seq:o.seq,op:o.operacao,desc:o.descricao,qtd_prev:o.qtd_prevista,qtd_real:o.qtd_realizada,inicio_data:o.inicio_data,inicio_hora:o.inicio_hora,situacao:o.situacao}))}));
-    state={pedido:numero,pedidoSeq:numero,cliente,data_entrega:dataEntrega,componentes};existingPedidoId=id;
+    const componentes=(comps||[]).map(c=>({id:c.id,posicao:c.posicao,codigo:c.codigo,descricao:c.descricao,desenho:c.desenho,quantidade:c.quantidade,data_entrega:c.data_entrega||'',operacoes:(opsMap[c.id]||[]).map(o=>({est:o.est,seq:o.seq,op:o.operacao,desc:o.descricao,qtd_prev:o.qtd_prevista,qtd_real:o.qtd_realizada,inicio_data:o.inicio_data,inicio_hora:o.inicio_hora,situacao:o.situacao}))}));
+    const mNum=numero.match(/^(.+)-(\w+)$/);
+    const baseNum=mNum?mNum[1]:numero;const itemNum=mNum?mNum[2]:'1';
+    state={pedido:baseNum,pedidoSeq:numero,cliente,componentes};existingPedidoId=id;
     switchTab('extrator');
     document.getElementById('fileTag').style.display='flex';document.getElementById('fileTagName').textContent='Pedido '+numero+' (banco)';
-    document.getElementById('pedidoPanel').style.display='block';document.getElementById('pedidoNum').textContent=numero;
-    document.getElementById('pedidoCli').textContent=cliente||'—';document.getElementById('dataEntregaInput').value=dataEntrega||'';
+    document.getElementById('pedidoPanel').style.display='block';
+    document.getElementById('pedidoNum').textContent=baseNum;
+    document.getElementById('pedidoBaseDisp').textContent=baseNum;
+    document.getElementById('pedidoItemInput').value=itemNum;
+    document.getElementById('pedidoCli').textContent=cliente||'—';
     document.getElementById('filterBar').style.display='flex';document.getElementById('saveBtn').disabled=false;
     setFlag('saved');document.getElementById('statusBadge').textContent='VISUALIZANDO';document.getElementById('statusBadge').className='status-badge ok';
     renderResult();
@@ -909,14 +963,16 @@ async function loadControle(){
   const area=document.getElementById('controleArea');
   area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Carregando...</div></div>';
   try{
-    const pedidos=await dbGet('pedidos','select=id,numero,cliente,data_entrega,data_importacao&order=data_entrega.asc.nullslast,data_importacao.desc');
+    const pedidos=await dbGet('pedidos','select=id,numero,cliente,data_entrega,data_importacao,finalizado&order=finalizado.asc.nullsfirst,data_entrega.asc.nullslast,data_importacao.desc');
     if(!pedidos?.length){area.innerHTML='<div class="empty-state" style="height:300px"><div class="empty-title">Nenhum pedido salvo</div><div class="empty-sub">Salve pedidos na aba Extrator</div></div>';return;}
     let html='';
     pedidos.forEach(p=>{
+      const fin=!!p.finalizado;
       const cls=entregaCls(p.data_entrega);
       const dias=entregaDias(p.data_entrega);
       let badge='',cardCls='';
-      if(!p.data_entrega){badge=`<span class="ctrl-badge ctrl-badge-none">Sem prazo</span>`;cardCls='';}
+      if(fin){badge=`<span class="ctrl-badge ctrl-badge-done">✓ Concluído</span>`;cardCls='cl-done';}
+      else if(!p.data_entrega){badge=`<span class="ctrl-badge ctrl-badge-none">Sem prazo</span>`;cardCls='';}
       else if(cls==='late'){badge=`<span class="ctrl-badge ctrl-badge-late">⚠ ${Math.abs(dias)}d atrasado</span>`;cardCls='cl-late';}
       else if(cls==='warn'){badge=`<span class="ctrl-badge ctrl-badge-warn">⚡ ${dias}d restantes</span>`;cardCls='cl-warn';}
       else{badge=`<span class="ctrl-badge ctrl-badge-ok">✓ ${dias}d restantes</span>`;cardCls='cl-ok';}
@@ -928,12 +984,21 @@ async function loadControle(){
             <div class="ctrl-cli">${p.cliente||'—'} ${p.data_entrega?'· Entrega: '+fmtDate(p.data_entrega):''}</div>
           </div>
           ${badge}
+          <button class="btn-finalizar${fin?' done':''}" onclick="event.stopPropagation();toggleFinalizado('${p.id}',${fin})">${fin?'↩ Reabrir':'✓ Finalizar'}</button>
         </div>
         <div class="ctrl-body" id="cb-${p.id}"></div>
       </div>`;
     });
     area.innerHTML=html;
   }catch(e){area.innerHTML=`<div class="empty-state"><div class="empty-title">Erro: ${e.message}</div></div>`;}
+}
+
+async function toggleFinalizado(id,atual){
+  try{
+    await dbPatch('pedidos',`id=eq.${id}`,{finalizado:!atual});
+    toast(atual?'Pedido reaberto':'Pedido marcado como concluído',atual?'warn':'success');
+    loadControle();
+  }catch(e){toast('Erro: '+e.message,'error');}
 }
 
 async function toggleControleCard(pedidoId){
@@ -1051,7 +1116,7 @@ async function toggleUserAtivo(id,ativo,nome,isMe){
 
 // ── RESET ─────────────────────────────────────────────────────────────────────
 function resetAll(){
-  state={pedido:'',pedidoSeq:'',cliente:'',data_entrega:'',componentes:[]};existingPedidoId=null;filterMode='all';searchTerm='';activeOps=new Set();
+  state={pedido:'',pedidoSeq:'',cliente:'',componentes:[]};existingPedidoId=null;filterMode='all';searchTerm='';activeOps=new Set();
   document.querySelectorAll('.chip-op').forEach(c=>c.classList.remove('active'));
   document.getElementById('pedidoPanel').style.display='none';document.getElementById('fileTag').style.display='none';
   document.getElementById('fileInput').value='';document.getElementById('filterBar').style.display='none';
@@ -1061,7 +1126,7 @@ function resetAll(){
   document.getElementById('statusBadge').textContent='AGUARDANDO';document.getElementById('statusBadge').className='status-badge';
   document.getElementById('emptyState').style.display='flex';document.getElementById('resultContent').style.display='none';document.getElementById('resultContent').innerHTML='';
   document.getElementById('searchInput').value='';document.getElementById('progressWrap').style.display='none';
-  document.getElementById('dataEntregaInput').value='';
+  document.getElementById('pedidoItemInput').value='';document.getElementById('pedidoBaseDisp').textContent='—';
   toast('Tudo limpo','warn');
 }
 
