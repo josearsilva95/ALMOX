@@ -204,21 +204,73 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .icon-btn.danger:hover{background:var(--red-bg);border-color:rgba(192,57,43,.3);color:var(--red);}
 
 /* ── CONTROLE DE PRODUÇÃO ── */
+@keyframes rowPulse{
+  0%,100%{background-color:#FDECEA;}
+  50%{background-color:#F08080;}
+}
+@keyframes rowPulseText{
+  0%,100%{color:#C0392B;}
+  50%{color:#922B21;}
+}
 .controle-layout{width:100%;padding:20px;overflow-y:auto;}
+/* Linhas da tabela de controle coloridas por prazo */
+.ops-table tr.row-ok td{
+  background-color:#D5F5E3 !important;
+  color:#145A32;
+}
+.ops-table tr.row-ok td span.op-badge,
+.ops-table tr.row-ok td span.entrega-badge{
+  background:rgba(255,255,255,.55)!important;
+  color:#145A32!important;
+  border:1px solid #A9DFBF!important;
+}
+.ops-table tr.row-ok:hover td{background-color:#ABEBC6 !important;}
+
+.ops-table tr.row-warn td{
+  background-color:#FDEBD0 !important;
+  color:#784212;
+}
+.ops-table tr.row-warn td span.op-badge,
+.ops-table tr.row-warn td span.entrega-badge{
+  background:rgba(255,255,255,.55)!important;
+  color:#784212!important;
+  border:1px solid #F0B27A!important;
+}
+.ops-table tr.row-warn:hover td{background-color:#FAD7A0 !important;}
+
+.ops-table tr.row-vencida td{
+  animation:rowPulse 1.5s ease-in-out infinite;
+  color:#922B21;
+  font-weight:600;
+}
+.ops-table tr.row-vencida td span{
+  animation:rowPulseText 1.5s ease-in-out infinite;
+}
 .ctrl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;border-left:4px solid var(--border2);overflow:hidden;}
-.ctrl-card.cl-ok  {border-left-color:var(--green);}
-.ctrl-card.cl-warn{border-left-color:var(--amber);}
-.ctrl-card.cl-late{border-left-color:var(--red);}
-.ctrl-card.cl-done{border-left-color:#818CF8;opacity:.72;}
+.ctrl-card.cl-ok  {border-left-color:#1e8449;background-color:#27AE60;border-color:#1e8449;}
+.ctrl-card.cl-ok .ctrl-header{background:#27AE60;}
+.ctrl-card.cl-ok .ctrl-header:hover{background:#239B55;}
+.ctrl-card.cl-ok .ctrl-num{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2);}
+.ctrl-card.cl-ok .ctrl-cli{color:rgba(255,255,255,.9);}
+.ctrl-card.cl-ok .ctrl-tog{color:rgba(255,255,255,.8);}
+.ctrl-card.cl-warn{border-left-color:#b7470a;background-color:#E67E22;border-color:#b7470a;}
+.ctrl-card.cl-warn .ctrl-header{background:#E67E22;}
+.ctrl-card.cl-warn .ctrl-header:hover{background:#CA6F1E;}
+.ctrl-card.cl-warn .ctrl-num{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2);}
+.ctrl-card.cl-warn .ctrl-cli{color:rgba(255,255,255,.9);}
+.ctrl-card.cl-warn .ctrl-tog{color:rgba(255,255,255,.8);}
+.ctrl-card.cl-late{border-left-color:var(--red);background-color:#FDECEA;}
+.ctrl-card.cl-done{border-left-color:#818CF8;background-color:#F5F3FF;border-color:rgba(129,140,248,.25);opacity:.75;}
+.ops-table tr.row-vencida td{animation:rowPulse 1.8s ease-in-out infinite;}
 .ctrl-header{padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .12s;}
-.ctrl-header:hover{background:var(--blue-light);}
+.ctrl-header:hover{background:rgba(0,0,0,.04);}
 .ctrl-tog{font-size:10px;color:var(--tx3);flex-shrink:0;transition:transform .18s;}
 .ctrl-tog.open{transform:rotate(90deg);}
 .ctrl-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue);}
 .ctrl-cli{font-size:11px;color:var(--tx2);margin-top:1px;}
 .ctrl-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap;}
-.ctrl-badge-ok  {background:var(--green-bg);color:var(--green);}
-.ctrl-badge-warn{background:var(--amber-bg);color:var(--amber);}
+.ctrl-badge-ok  {background:rgba(255,255,255,.3);color:#fff;border:1px solid rgba(255,255,255,.5);}
+.ctrl-badge-warn{background:rgba(255,255,255,.3);color:#fff;border:1px solid rgba(255,255,255,.5);}
 .ctrl-badge-late{background:var(--red-bg);color:var(--red);}
 .ctrl-badge-none{background:var(--bg);color:var(--tx3);border:1px solid var(--border);}
 .ctrl-badge-done{background:#EEF2FF;color:#4338CA;border:1px solid rgba(99,102,241,.25);}
@@ -350,37 +402,39 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 <!-- PAGE: EXTRATOR -->
 <div class="page active" id="pageExtrator">
   <aside class="sidebar">
-    <div class="sb-section">
-      <div class="sb-label">Importar Planilha</div>
-      <label for="fileInput" class="upload-zone" id="uploadZone">
-        <div class="upload-tri"></div>
-        <div class="upload-primary">Clique ou arraste aqui</div>
-        <div class="upload-secondary">.xlsx · .xls · .csv</div>
-      </label>
-      <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;">
-      <div class="file-tag" id="fileTag"><span>📄</span><span id="fileTagName"></span></div>
-    </div>
-    <div class="sb-section" id="pedidoPanel" style="display:none">
-      <div class="sb-label">Pedido Detectado</div>
-      <div class="pedido-num" id="pedidoNum">—</div>
-      <div class="pedido-cli" id="pedidoCli">—</div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:10px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Item / Sequência</div>
-        <div style="display:flex;align-items:center;gap:5px">
-          <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx2)" id="pedidoBaseDisp">—</span>
-          <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx3)">-</span>
-          <input type="text" id="pedidoItemInput" maxlength="10" placeholder="1"
-            style="width:54px;font-family:var(--mono);font-size:14px;font-weight:600;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue);border-radius:4px;padding:3px 7px;outline:none;text-align:center"
-            oninput="onPedidoItemChange()">
-        </div>
+    <div style="flex:1;overflow-y:auto;min-height:0">
+      <div class="sb-section">
+        <div class="sb-label">Importar Planilha</div>
+        <label for="fileInput" class="upload-zone" id="uploadZone">
+          <div class="upload-tri"></div>
+          <div class="upload-primary">Clique ou arraste aqui</div>
+          <div class="upload-secondary">.xlsx · .xls · .csv</div>
+        </label>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;">
+        <div class="file-tag" id="fileTag"><span>📄</span><span id="fileTagName"></span></div>
       </div>
-      <div id="pedidoFlag" style="margin-top:8px"></div>
-    </div>
-    <div class="sb-section">
-      <div class="sb-label">Totalizadores</div>
-      <div class="stats-grid">
-        <div class="stat-cell"><div class="stat-num" id="statComp">0</div><div class="stat-lbl">Itens</div></div>
-        <div class="stat-cell"><div class="stat-num" id="statOps">0</div><div class="stat-lbl">Operações</div></div>
+      <div class="sb-section" id="pedidoPanel" style="display:none">
+        <div class="sb-label">Pedido Detectado</div>
+        <div class="pedido-num" id="pedidoNum">—</div>
+        <div class="pedido-cli" id="pedidoCli">—</div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+          <div style="font-size:10px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Item / Sequência</div>
+          <div style="display:flex;align-items:center;gap:5px">
+            <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx2)" id="pedidoBaseDisp">—</span>
+            <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx3)">-</span>
+            <input type="text" id="pedidoItemInput" maxlength="10" placeholder="1"
+              style="width:54px;font-family:var(--mono);font-size:14px;font-weight:600;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue);border-radius:4px;padding:3px 7px;outline:none;text-align:center"
+              oninput="onPedidoItemChange()">
+          </div>
+        </div>
+        <div id="pedidoFlag" style="margin-top:8px"></div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label">Totalizadores</div>
+        <div class="stats-grid">
+          <div class="stat-cell"><div class="stat-num" id="statComp">0</div><div class="stat-lbl">Itens</div></div>
+          <div class="stat-cell"><div class="stat-num" id="statOps">0</div><div class="stat-lbl">Operações</div></div>
+        </div>
       </div>
     </div>
     <div class="sb-actions">
@@ -820,11 +874,12 @@ async function executeSave(){
 }
 
 function getUltimaOp(ops){
-  if(!ops?.length)return{label:'—',cls:'op-none'};
+  if(!ops?.length)return{label:'—',cls:'op-none',op:'—'};
+  const em=ops.find(o=>/anda|proc|exec/i.test(o.situacao||''));
+  if(em)return{label:em.desc||em.op,cls:'op-andamento',op:em.op||'—'};
   const conc=ops.filter(o=>/concl|finaliz/i.test(o.situacao||''));
-  if(conc.length){const last=conc.sort((a,b)=>parseInt(b.seq)-parseInt(a.seq))[0];return{label:last.desc||last.op,cls:'op-concluida'};}
-  const em=ops.find(o=>o.inicio_data&&o.inicio_hora);if(em)return{label:em.desc||em.op,cls:'op-andamento'};
-  return{label:ops[0].desc||ops[0].op,cls:'op-aberta'};
+  if(conc.length){const last=conc.sort((a,b)=>parseInt(b.seq)-parseInt(a.seq))[0];return{label:last.desc||last.op,cls:'op-concluida',op:last.op||'—'};}
+  return{label:ops[0].desc||ops[0].op,cls:'op-aberta',op:ops[0].op||'—'};
 }
 
 function getFiltered(){
@@ -969,19 +1024,18 @@ async function loadControle(){
     pedidos.forEach(p=>{
       const fin=!!p.finalizado;
       const cls=entregaCls(p.data_entrega);
-      const dias=entregaDias(p.data_entrega);
       let badge='',cardCls='';
       if(fin){badge=`<span class="ctrl-badge ctrl-badge-done">✓ Concluído</span>`;cardCls='cl-done';}
       else if(!p.data_entrega){badge=`<span class="ctrl-badge ctrl-badge-none">Sem prazo</span>`;cardCls='';}
-      else if(cls==='late'){badge=`<span class="ctrl-badge ctrl-badge-late">⚠ ${Math.abs(dias)}d atrasado</span>`;cardCls='cl-late';}
-      else if(cls==='warn'){badge=`<span class="ctrl-badge ctrl-badge-warn">⚡ ${dias}d restantes</span>`;cardCls='cl-warn';}
-      else{badge=`<span class="ctrl-badge ctrl-badge-ok">✓ ${dias}d restantes</span>`;cardCls='cl-ok';}
+      else if(cls==='late'){badge=`<span class="ctrl-badge ctrl-badge-late">⚠ Vencido</span>`;cardCls='cl-late';}
+      else if(cls==='warn'){badge=`<span class="ctrl-badge ctrl-badge-warn">⚡ Urgente</span>`;cardCls='cl-warn';}
+      else{badge=`<span class="ctrl-badge ctrl-badge-ok">✓ No prazo</span>`;cardCls='cl-ok';}
       html+=`<div class="ctrl-card ${cardCls}" id="cc-${p.id}">
         <div class="ctrl-header" onclick="toggleControleCard('${p.id}')">
           <span class="ctrl-tog" id="ct-${p.id}">▶</span>
           <div style="flex:1;min-width:0">
             <div class="ctrl-num">${p.numero}</div>
-            <div class="ctrl-cli">${p.cliente||'—'} ${p.data_entrega?'· Entrega: '+fmtDate(p.data_entrega):''}</div>
+            <div class="ctrl-cli">${p.cliente||'—'}</div>
           </div>
           ${badge}
           <button class="btn-finalizar${fin?' done':''}" onclick="event.stopPropagation();toggleFinalizado('${p.id}',${fin})">${fin?'↩ Reabrir':'✓ Finalizar'}</button>
@@ -1015,19 +1069,25 @@ async function toggleControleCard(pedidoId){
     const ops=await dbGet('operacoes',`select=*&pedido_id=eq.${pedidoId}`);
     const opsMap={};(ops||[]).forEach(o=>{if(!opsMap[o.componente_id])opsMap[o.componente_id]=[];opsMap[o.componente_id].push(o);});
     if(!comps?.length){body.innerHTML='<div style="padding:14px 16px;color:var(--tx3);font-size:12px">Sem itens cadastrados</div>';body.dataset.loaded='1';return;}
-    let html=`<table class="ops-table" style="min-width:500px">
-      <thead><tr><th>POS.</th><th>CÓDIGO</th><th>DESCRIÇÃO</th><th>ATUAL</th><th>QTD</th><th>OPS</th></tr></thead><tbody>`;
+    let html=`<table class="ops-table" style="min-width:620px">
+      <thead><tr><th>POS.</th><th>CÓDIGO</th><th>DESCRIÇÃO</th><th>OP</th><th>ATUAL</th><th>ENTREGA</th><th>QTD</th></tr></thead><tbody>`;
     comps.forEach(c=>{
       const cOps=(opsMap[c.id]||[]).map(o=>({est:o.est,seq:o.seq,op:o.operacao,desc:o.descricao,situacao:o.situacao}));
       const ultima=getUltimaOp(cOps);
       const qty=c.quantidade?(parseFloat(c.quantidade)%1===0?parseInt(c.quantidade):parseFloat(c.quantidade)):'—';
-      html+=`<tr>
-        <td style="color:var(--blue);font-weight:600">${c.posicao}</td>
+      const eCls=entregaCls(c.data_entrega);
+      const entregaCell=c.data_entrega
+        ?`<span class="entrega-badge entrega-${eCls||'ok'}" style="font-weight:700">${fmtDate(c.data_entrega)}</span>`
+        :'—';
+      const rowCls=c.data_entrega?(eCls==='late'?'row-vencida':eCls==='warn'?'row-warn':'row-ok'):'';
+      html+=`<tr class="${rowCls}">
+        <td style="font-weight:700">${c.posicao}</td>
         <td>${c.codigo}</td>
-        <td style="white-space:normal;max-width:280px">${c.descricao}</td>
+        <td style="white-space:normal;max-width:220px;font-weight:500">${c.descricao}</td>
+        <td style="font-family:var(--mono);font-size:10px;font-weight:700">${ultima.op}</td>
         <td>${ultima.cls==='op-none'?'—':`<span class="op-badge ${ultima.cls}" style="font-size:9px">${ultima.label}</span>`}</td>
+        <td>${entregaCell}</td>
         <td>${qty}</td>
-        <td>${cOps.length}</td>
       </tr>`;
     });
     html+=`</tbody></table>`;body.innerHTML=html;body.dataset.loaded='1';
