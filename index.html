@@ -184,7 +184,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ops-table thead{background:#F4F6FB;border-bottom:1px solid var(--border);}
 .ops-table th{padding:5px 11px;text-align:left;color:var(--tx3);font-weight:600;letter-spacing:.08em;font-size:9px;text-transform:uppercase;white-space:nowrap;border-right:1px solid var(--border);}
 .ops-table th:last-child{border-right:none;}
-.ops-table td{padding:7px 11px;border-right:1px solid var(--border);border-bottom:1px solid #EEF2F7;vertical-align:middle;color:var(--tx);white-space:nowrap;}
+.ops-table td{padding:7px 11px;border-right:1px solid var(--border);border-bottom:1px solid #EEF2F7;vertical-align:middle;color:var(--tx);white-space:nowrap;background-color:var(--surface);}
 .ops-table td:last-child{border-right:none;}.ops-table tr:last-child td{border-bottom:none;}
 .ops-table tbody tr:hover td{background:var(--blue-light);}
 .sit-badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:600;}
@@ -1002,7 +1002,12 @@ async function viewSavedPedido(id,numero,cliente,dataEntrega){
     const comps=await dbGet('componentes',`select=*&pedido_id=eq.${id}&order=posicao`);
     const ops=await dbGet('operacoes',`select=*&pedido_id=eq.${id}`);
     const opsMap={};(ops||[]).forEach(o=>{if(!opsMap[o.componente_id])opsMap[o.componente_id]=[];opsMap[o.componente_id].push(o);});
-    const componentes=(comps||[]).map(c=>({id:c.id,posicao:c.posicao,codigo:c.codigo,descricao:c.descricao,desenho:c.desenho,quantidade:c.quantidade,data_entrega:c.data_entrega||'',operacoes:(opsMap[c.id]||[]).map(o=>({est:o.est,seq:o.seq,op:o.operacao,desc:o.descricao,qtd_prev:o.qtd_prevista,qtd_real:o.qtd_realizada,inicio_data:o.inicio_data,inicio_hora:o.inicio_hora,situacao:o.situacao}))}));
+    const componentes=(comps||[]).map(c=>{
+      const opM=(c.descricao||'').match(/^(\d+\/\d+)\s*\|\s*/);
+      const op=opM?opM[1]:'';
+      const descricao=opM?c.descricao.slice(opM[0].length):c.descricao;
+      return{id:c.id,posicao:c.posicao,codigo:c.codigo,descricao,op,desenho:c.desenho,quantidade:c.quantidade,data_entrega:c.data_entrega||'',operacoes:(opsMap[c.id]||[]).map(o=>({est:o.est,seq:o.seq,op:o.operacao,desc:o.descricao,qtd_prev:o.qtd_prevista,qtd_real:o.qtd_realizada,inicio_data:o.inicio_data,inicio_hora:o.inicio_hora,situacao:o.situacao}))};
+    });
     const mNum=numero.match(/^(.+)-(\w+)$/);
     const baseNum=mNum?mNum[1]:numero;const itemNum=mNum?mNum[2]:'1';
     state={pedido:baseNum,pedidoSeq:numero,cliente,componentes};existingPedidoId=id;
