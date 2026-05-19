@@ -133,7 +133,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .empty-sub{font-size:12px;color:var(--tx3);font-family:var(--mono);}
 
 /* ── GRID (8 colunas agora com Entrega) ── */
-.col-header,.comp-row{display:grid;grid-template-columns:minmax(80px,80px) minmax(100px,100px) 1fr minmax(110px,110px) minmax(130px,130px) minmax(90px,90px) minmax(55px,55px) minmax(50px,50px);}
+.col-header,.comp-row{display:grid;grid-template-columns:minmax(80px,80px) minmax(100px,100px) 1fr minmax(100px,100px) minmax(110px,110px) minmax(130px,130px) minmax(90px,90px) minmax(55px,55px) minmax(50px,50px);}
+.cr-op{font-family:var(--mono);font-size:11px;color:var(--blue);font-weight:600;}
 .col-header{background:#F4F6FB;border-left:1px solid var(--border);border-right:1px solid var(--border);}
 .ch{padding:5px 10px;font-size:9px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;border-right:1px solid var(--border);}
 .ch:last-child{border-right:none;}
@@ -744,13 +745,22 @@ function goAdmin(){
 
 // ── EXTRAÇÃO ──────────────────────────────────────────────────────────────────
 function extractFromRows(rows){
-  const componentes=[];let pedido='',cliente='',current=null,pendingOps=[];
+  const componentes=[];let pedido='',cliente='',current=null,pendingOps=[],pendingOP='';
   for(let i=0;i<rows.length;i++){
     const row=rows[i];
     if(/pedido:/i.test(row)){const m=row.match(/pedido:\s*(\d+)/i);if(m)pedido=m[1];const cm=row.match(/cliente:\s*\d+\s+(.+?)(?:\s{2,}|$)/i);if(cm)cliente=cm[1].trim();}
+    if(/ordem\s+de\s+produ[çc][ãa]o\s*:/i.test(row)){
+      const nums=(row.match(/\b\d+\b/g)||[]);
+      const op1=nums[0]||'';const op2=nums[1]||'';
+      pendingOP=op1&&op2?`${op1}/${op2}`:(op1||op2);
+    }
     const compM=row.match(/^(\d+(?:\.\d+)*)\s*-\s*(\d+\.\d+)\s*-\s*(.+?)(?=\t{2,}|$)/);
     if(compM){
-      if(current){current.operacoes=[...pendingOps];componentes.push(current);pendingOps=[];}
+      if(current){
+        current.operacoes=[...pendingOps];
+        current.op=pendingOP;
+        componentes.push(current);pendingOps=[];pendingOP='';
+      }
       const dM=row.match(/([A-ZÁÇÃÕ]{2,}[\d]+(?:\.[\d]+)+)/);let desenho=dM?dM[0]:'';
       const qM=row.match(/(\d+(?:[.,]\d+)?)\s*PC/i);let quantidade=qM?qM[1].replace(',','.'):'';
       let descricao=compM[3].trim();
@@ -766,7 +776,11 @@ function extractFromRows(rows){
       pendingOps.push({est:parts[0],seq:parts[1],op:parts[2],desc:parts[3],qtd_prev:parts[5]||'',qtd_real:parts[6]||'',inicio_data:iData,inicio_hora:iHora,situacao});
     }
   }
-  if(current){current.operacoes=[...pendingOps];componentes.push(current);}
+  if(current){
+    current.operacoes=[...pendingOps];
+    current.op=pendingOP;
+    componentes.push(current);
+  }
   return{pedido,cliente,componentes};
 }
 
@@ -857,7 +871,7 @@ async function executeSave(){
     for(let i=0;i<total;i++){
       const comp=state.componentes[i];
       pl.textContent=`Salvando item ${i+1} de ${total}...`;pf.style.width=(10+Math.round((i/total)*85))+'%';
-      const nc=await dbPost('componentes',{pedido_id:pedidoId,posicao:comp.posicao,codigo:comp.codigo,descricao:comp.descricao,desenho:comp.desenho,quantidade:parseFloat(comp.quantidade)||0,unidade:'PC',data_entrega:comp.data_entrega||null});
+      const nc=await dbPost('componentes',{pedido_id:pedidoId,posicao:comp.posicao,codigo:comp.codigo,descricao:(comp.op?comp.op+' | ':'')+comp.descricao,desenho:comp.desenho,quantidade:parseFloat(comp.quantidade)||0,unidade:'PC',data_entrega:comp.data_entrega||null});
       const compId=nc[0].id;
       if(comp.operacoes?.length){
         await dbPost('operacoes',comp.operacoes.map(op=>({componente_id:compId,pedido_id:pedidoId,est:op.est,seq:op.seq,operacao:op.op,descricao:op.desc,qtd_prevista:parseFloat(op.qtd_prev)||0,qtd_realizada:parseFloat(op.qtd_real)||0,inicio_data:op.inicio_data||null,inicio_hora:op.inicio_hora||null,situacao:op.situacao||'Aberta'})));
@@ -908,7 +922,7 @@ function renderResult(){
   </div>
   <div class="col-header">
     <div class="ch">Pos.</div><div class="ch">Código</div><div class="ch">Descrição</div>
-    <div class="ch">Atual</div><div class="ch">Desenho</div><div class="ch">Entrega</div>
+    <div class="ch">OP</div><div class="ch">Atual</div><div class="ch">Desenho</div><div class="ch">Entrega</div>
     <div class="ch">Qtd</div><div class="ch" style="text-align:center">Ops</div>
   </div>`;
   filtered.forEach((comp,idx)=>{
@@ -927,6 +941,7 @@ function renderResult(){
         <div class="cr-cell cr-pos">${comp.posicao}</div>
         <div class="cr-cell cr-cod">${comp.codigo}</div>
         <div class="cr-cell cr-desc">${comp.descricao}</div>
+        <div class="cr-cell cr-op">${comp.op||'—'}</div>
         <div class="cr-cell cr-atual">${ultima.cls==='op-none'?`<span class="op-none">—</span>`:`<span class="op-badge ${ultima.cls}">${ultima.label}</span>`}</div>
         <div class="cr-cell cr-desenho">${comp.desenho||'—'}</div>
         <div class="cr-cell" style="align-items:center"><input type="date" class="inline-date${comp.data_entrega?' date-'+entregaCls(comp.data_entrega):''}" value="${comp.data_entrega||''}" onchange="updateCompDate(${compIdx},this.value)" onclick="event.stopPropagation()" title="${comp.data_entrega?fmtDate(comp.data_entrega):'Sem prazo'}"></div>
