@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <title>PCP · ALMOX</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -351,11 +353,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
     <div class="login-err" id="loginErr"></div>
     <div class="login-field">
       <label class="login-label">Usuário</label>
-      <input class="login-input" type="text" id="loginUser" placeholder="nome de usuário" autocomplete="username">
+      <input class="login-input" type="text" id="loginUser" name="username" placeholder="nome de usuário" autocomplete="username">
     </div>
     <div class="login-field">
       <label class="login-label">Senha</label>
-      <input class="login-input" type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+      <input class="login-input" type="password" id="loginPass" name="password" placeholder="••••••••" autocomplete="current-password">
     </div>
     <button class="login-btn" id="loginBtn" onclick="doLogin()">Entrar</button>
     <div style="margin-top:18px;padding:10px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;text-align:center">
@@ -601,20 +603,60 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 // ── SESSÃO ────────────────────────────────────────────────────────────────────
 const SESSION_KEY = 'almox_session';
 let currentUser = null;
-function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY));}catch(e){return null;}}
-function setSession(u){localStorage.setItem(SESSION_KEY,JSON.stringify(u));currentUser=u;}
-function clearSession(){localStorage.removeItem(SESSION_KEY);currentUser=null;}
+
+function esc(s){
+  if(s===null||s===undefined)return '—';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function requireAdmin(){
+  if(!currentUser||currentUser.perfil!=='Admin'){toast('Acesso negado.','error');return false;}
+  return true;
+}
+function getSession(){try{return JSON.parse(sessionStorage.getItem(SESSION_KEY));}catch(e){return null;}}
+function setSession(u){
+  const sess={id:u.id,nome:u.nome,username:u.username,perfil:u.perfil,cor:u.cor||'#3B6FD4',expira_em:u.expira_em,_exp:Date.now()+(8*60*60*1000)};
+  sessionStorage.setItem(SESSION_KEY,JSON.stringify(sess));
+  currentUser=sess;
+}
+function clearSession(){sessionStorage.removeItem(SESSION_KEY);currentUser=null;}
 function isSessionValid(s){
-  if(!s?.id)return false;
-  if(s.perfil==='Admin')return true;
-  if(!s.expira_em)return true;
-  return new Date(s.expira_em)>new Date();
+  if(!s||!s.id)return false;
+  if(s._exp&&Date.now()>s._exp)return false;
+  if(s.perfil!=='Admin'&&s.expira_em&&new Date(s.expira_em)<new Date())return false;
+  return true;
 }
 
+// Auto-logout por inatividade (30 min)
+let _inactivityTimer;
+function resetInactivityTimer(){
+  clearTimeout(_inactivityTimer);
+  _inactivityTimer=setTimeout(()=>{toast('Sessão encerrada por inatividade.','warn');setTimeout(doLogout,2000);},30*60*1000);
+}
+['click','keydown','mousemove','touchstart'].forEach(ev=>document.addEventListener(ev,resetInactivityTimer,{passive:true}));
+
 // ── SUPABASE ──────────────────────────────────────────────────────────────────
+// SECURITY: SB_KEY é anon/publishable key (segura para frontend com RLS ativado)
+// NUNCA use service_role key no frontend. Configure RLS em todas as tabelas.
 const SB_URL='https://lavehpbeizrqcuaiqcpx.supabase.co/rest/v1';
 const SB_KEY='sb_publishable_Q6SWGBjlO3TIdlO7aq16qQ_0QmTZX1R';
-const HEADERS={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':SB_KEY,'Prefer':'return=representation'};
+// SECURITY: Headers base - Authorization usa anon key (backend valida via RLS)
+// Para produção: substituir por Supabase Auth JWT (supabase.auth.getSession())
+function getHeaders(extra={}){
+  return {
+    'Content-Type':'application/json',
+    'apikey':SB_KEY,
+    'Authorization':SB_KEY,
+    'Prefer':'return=representation',
+    ...extra
+  };
+}
+// Alias para compatibilidade
+const HEADERS = {
+  'Content-Type':'application/json',
+  'apikey':SB_KEY,
+  'Authorization':SB_KEY,
+  'Prefer':'return=representation'
+};
 async function dbGet(t,p=''){const r=await fetch(`${SB_URL}/${t}${p?'?'+p:''}`,{headers:HEADERS});if(!r.ok){const e=await r.json();throw new Error(e.message||r.statusText);}return r.json();}
 async function dbPost(t,b){const r=await fetch(`${SB_URL}/${t}`,{method:'POST',headers:HEADERS,body:JSON.stringify(b)});if(!r.ok){const e=await r.json();throw new Error(e.message||r.statusText);}return r.json();}
 async function dbPatch(t,p,b){const h={...HEADERS,'Prefer':'return=minimal'};const r=await fetch(`${SB_URL}/${t}?${p}`,{method:'PATCH',headers:h,body:JSON.stringify(b)});if(!r.ok){const e=await r.json();throw new Error(e.message||r.statusText);}}
@@ -646,7 +688,10 @@ async function doLogin(){
   if(!user||!pass){showLoginErr('Preencha usuário e senha.');return;}
   btn.disabled=true;btn.textContent='Entrando...';
   try{
-    const rows=await dbGet('usuarios',`username=eq.${encodeURIComponent(user)}&select=*&limit=1`);
+    // SECURITY: Sanitiza input - permite apenas alfanumérico, ponto, hífen e underscore
+    const safeUser = user.replace(/[^a-zA-Z0-9._\-]/g, '');
+    if(safeUser !== user){showLoginErr('Usuário contém caracteres inválidos.');return;}
+    const rows=await dbGet('usuarios',`username=eq.${encodeURIComponent(safeUser)}&select=id,nome,username,perfil,cor,ativo,expira_em,senha_hash&limit=1`);
     if(!rows?.length){showLoginErr('Usuário ou senha incorretos.');return;}
     const u=rows[0];
     if(!u.ativo){showLoginErr('Usuário inativo. Contate o administrador.');return;}
@@ -685,23 +730,43 @@ async function initApp(){
 }
 
 // ── BOOT ──────────────────────────────────────────────────────────────────────
-window.addEventListener('load',()=>{
+function bootApp(){
   const fill=document.getElementById('ldFill');
   const status=document.getElementById('ldStatus');
+  if(!fill||!status){
+    // DOM não pronto ainda, tenta novamente
+    setTimeout(bootApp,100);return;
+  }
   let pct=0;
   const iv=setInterval(()=>{pct+=Math.random()*30+10;if(pct>=90){pct=90;clearInterval(iv);}fill.style.width=pct+'%';},140);
   setTimeout(()=>{
-    clearInterval(iv);fill.style.width='100%';status.textContent='verificando sessão...';
+    clearInterval(iv);
+    fill.style.width='100%';
+    status.textContent='verificando sessão...';
     setTimeout(()=>{
-      const sess=getSession();
-      document.getElementById('loadingScreen').style.display='none';
+      const ld=document.getElementById('loadingScreen');
+      const ls=document.getElementById('loginScreen');
+      // Esconde loading independente de qualquer erro
+      if(ld)ld.style.display='none';
       try{
-        if(isSessionValid(sess)){currentUser=sess;showMainApp();}
-        else{clearSession();document.getElementById('loginScreen').style.display='flex';}
-      }catch(e){clearSession();document.getElementById('loginScreen').style.display='flex';}
-    },350);
-  },1100);
-});
+        const sess=getSession();
+        if(isSessionValid(sess)){
+          currentUser=sess;
+          showMainApp();
+          resetInactivityTimer();
+        } else {
+          clearSession();
+          if(ls)ls.style.display='flex';
+        }
+      }catch(e){
+        console.warn('Boot error:',e);
+        clearSession();
+        if(ls)ls.style.display='flex';
+      }
+    },400);
+  },900);
+}
+window.addEventListener('load', bootApp);
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none')doLogin();});
 
 // ── CONVERSÃO EXCEL ───────────────────────────────────────────────────────────
@@ -735,6 +800,8 @@ function switchTab(tab){
   else if(tab==='controle'){document.getElementById('tabControle').classList.add('active');document.getElementById('pageControle').classList.add('active');loadControle();}
 }
 function goAdmin(){
+  // SECURITY: Dupla verificação de perfil antes de renderizar painel admin
+  if(!requireAdmin()) return;
   ['tabExtrator','tabSaved','tabControle'].forEach(id=>document.getElementById(id)?.classList.remove('active'));
   ['pageExtrator','pageSaved','pageControle'].forEach(id=>document.getElementById(id)?.classList.remove('active'));
   document.getElementById('pageAdmin').classList.add('active');
@@ -1301,6 +1368,7 @@ async function imprimirPedido(id,numero,cliente,dataEntrega,finalizado){
 // ── ADMIN ─────────────────────────────────────────────────────────────────────
 let usersData=[];
 async function loadUserList(){
+  if(!requireAdmin()) return;
   const area=document.getElementById('userListArea');
   area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Carregando...</div></div>';
   try{
@@ -1352,6 +1420,7 @@ function openUserModal(idx){
 }
 function closeUserModal(){document.getElementById('userModal').style.display='none';}
 async function saveUser(){
+  if(!requireAdmin()) return;
   const id=document.getElementById('modalUserId').value,nome=document.getElementById('mNome').value.trim();
   const uname=document.getElementById('mUsername').value.trim(),senha=document.getElementById('mSenha').value;
   const perfil=document.getElementById('mPerfil').value,cor=document.getElementById('mCor').value;
@@ -1372,6 +1441,7 @@ async function saveUser(){
   finally{btn.disabled=false;btn.textContent='Salvar';}
 }
 async function toggleUserAtivo(id,ativo,nome,isMe){
+  if(!requireAdmin()) return;
   if(isMe)return;const novoAtivo=!ativo;
   if(!confirm(`${novoAtivo?'Ativar':'Desativar'} "${nome}"?`))return;
   try{await dbPatch('usuarios',`id=eq.${id}`,{ativo:novoAtivo});toast(`Usuário ${novoAtivo?'ativado':'desativado'}`,novoAtivo?'success':'warn');loadUserList();}
