@@ -1084,7 +1084,29 @@ function collapseAll(){document.querySelectorAll('.ops-wrap').forEach(el=>el.cla
 function setFilter(mode,el){filterMode=mode;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderResult();}
 function toggleOp(op,el){if(activeOps.has(op)){activeOps.delete(op);el.classList.remove('active');}else{activeOps.add(op);el.classList.add('active');}renderResult();}
 function applyFilter(){searchTerm=document.getElementById('searchInput').value;renderResult();}
-function updateCompDate(idx,val){if(state.componentes[idx])state.componentes[idx].data_entrega=val||'';}
+async function updateCompDate(idx,val){
+  if(!state.componentes[idx])return;
+  state.componentes[idx].data_entrega=val||'';
+  const comp=state.componentes[idx];
+  // Salva imediatamente no Supabase se o componente já tem ID
+  if(comp.id){
+    try{
+      await dbPatch('componentes',`id=eq.${comp.id}`,{data_entrega:val||null});
+      // Recalcula a menor data de entrega do pedido e atualiza
+      if(existingPedidoId){
+        const datas=state.componentes.filter(c=>c.data_entrega).map(c=>c.data_entrega).sort();
+        const minDate=datas[0]||null;
+        await dbPatch('pedidos',`id=eq.${existingPedidoId}`,{data_entrega:minDate,data_atualizacao:new Date().toISOString()});
+      }
+      // Atualiza visual da linha sem re-renderizar tudo
+      const input=document.querySelectorAll('.inline-date')[idx];
+      if(input){
+        input.className='inline-date'+(val?' date-'+entregaCls(val):'');
+      }
+      toast('Data salva','ok');
+    }catch(e){toast('Erro ao salvar data: '+e.message,'err');}
+  }
+}
 
 // ── PEDIDOS SALVOS ────────────────────────────────────────────────────────────
 async function loadSavedCount(){try{const d=await dbGet('pedidos','select=id');document.getElementById('savedCount').textContent=d?.length||0;}catch(e){}}
