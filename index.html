@@ -1,1 +1,51 @@
-index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>PCP · ALMOX</title>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#EEF2F7;--surface:#fff;--border:#DDE3EE;--border2:#C8D0E0;
+  --tx:#1C2333;--tx2:#5A6580;--tx3:#9AA3B8;
+  --blue:#3B6FD4;--blue2:#5588E8;--blue-bg:#EBF0FB;--blue-light:#F0F4FD;
+  --green:#27AE60;--green-bg:#E8F8EF;
+  --amber:#D4820A;--amber-bg:#FEF6E7;
+  --red:#C0392B;--red-bg:#FDECEA;
+  --topbar:#1A2340;
+  --mono:'IBM Plex Mono',monospace;--sans:'Inter',sans-serif;--r:8px;--rs:6px;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px;}
+
+/* ── LOADING / LOGIN ── */
+#loadingScreen,#loginScreen{position:fixed;inset:0;z-index:9000;background:#0d1525;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+#loginScreen{z-index:8999;}
+.ld-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:3px;}
+.ld-sub{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px;}
+.ld-bar{width:180px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-top:16px;}
+.ld-bar-fill{height:100%;background:linear-gradient(90deg,#4A7FE5,#2EC4B6);border-radius:2px;width:0%;transition:width .4s ease;}
+.ld-status{font-size:10px;color:rgba(255,255,255,.3);margin-top:10px;font-family:var(--mono);}
+.login-box{background:#151e2d;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:40px 44px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.login-logo-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;}
+.login-logo-ico{width:40px;height:40px;background:linear-gradient(135deg,#4A7FE5,#2EC4B6);border-radius:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px rgba(79,142,229,.4);}
+.login-logo-ico svg{width:22px;height:22px;}
+.login-t{font-size:20px;font-weight:700;color:#fff;letter-spacing:2px;}
+.login-st{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:28px;margin-top:2px;}
+.login-err{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);color:#F87171;border-radius:6px;padding:9px 12px;font-size:12px;text-align:center;margin-bottom:14px;display:none;}
+.login-err.show{display:block;}
+.login-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.login-label{font-size:10px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;}
+.login-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:10px 13px;font-size:13px;color:#fff;font-family:var(--sans);outline:none;transition:border-color .15s;}
+.login-input:focus{border-color:rgba(74,127,229,.7);background:rgba(74,127,229,.06);}
+.login-input::placeholder{color:rgba(255,255,255,.18);}
+.login-btn{width:100%;padding:12px;background:linear-gradient(135deg,#4A7FE5,#2EC4B6);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .15s;margin-top:6px;box-shadow:0 4px 16px rgba(74,127,229,.35);}
+.login-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 24px
