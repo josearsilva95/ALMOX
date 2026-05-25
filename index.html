@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>PCP Â· ALMOX</title>
+<title>PCP · ALMOX</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -25,7 +25,7 @@
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px;}
 
-/* â”€â”€ LOADING / LOGIN â”€â”€ */
+/* ── LOADING / LOGIN ── */
 #loadingScreen,#loginScreen{position:fixed;inset:0;z-index:9000;background:#0d1525;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 #loginScreen{z-index:8999;}
 .ld-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:3px;}
@@ -51,10 +51,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .login-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 24px rgba(74,127,229,.55);}
 .login-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 
-/* â”€â”€ MAIN APP â”€â”€ */
+/* ── MAIN APP ── */
 #mainApp{display:none;flex-direction:column;height:100vh;overflow:hidden;}
 
-/* â”€â”€ TOPBAR â”€â”€ */
+/* ── TOPBAR ── */
 .topbar{background:var(--topbar);color:#fff;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .topbar-left{display:flex;align-items:center;gap:12px;}
 .logo-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4A7FE5,#2A5BC4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
@@ -76,7 +76,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .btn-topbar.admin-btn{border-color:rgba(74,127,229,.4);color:rgba(160,185,255,.8);}
 .btn-topbar.admin-btn:hover{background:rgba(74,127,229,.2);color:#fff;}
 
-/* â”€â”€ TABS â”€â”€ */
+/* ── TABS ── */
 .tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);display:flex;padding:0 0 0 16px;flex-shrink:0;}
 .tab{padding:13px 20px;font-size:13px;font-weight:400;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--tx3);transition:all .15s;display:flex;align-items:center;gap:7px;}
 .tab:hover{color:var(--tx2)}.tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500;}
@@ -84,7 +84,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .tab-count{background:var(--blue);color:#fff;font-size:10px;font-weight:600;padding:1px 7px;border-radius:20px;font-family:var(--mono);}
 .page{display:none;flex:1;overflow:hidden;}.page.active{display:flex;}
 
-/* â”€â”€ SIDEBAR â”€â”€ */
+/* ── SIDEBAR ── */
 .sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
 .sb-section{padding:14px 14px;border-bottom:1px solid var(--border);}
 .sb-label{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
@@ -112,7 +112,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .btn-clear{display:flex;align-items:center;justify-content:center;width:100%;padding:8px;margin-top:5px;border-radius:var(--r);font-size:12px;cursor:pointer;border:none;background:transparent;color:var(--tx3);transition:color .15s;font-family:var(--sans);}
 .btn-clear:hover{color:var(--tx2);}
 
-/* â”€â”€ MAIN CONTENT â”€â”€ */
+/* ── MAIN CONTENT ── */
 .main-ext{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 .toolbar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .toolbar-info{font-size:12px;color:var(--tx3);}.toolbar-info strong{color:var(--tx);font-weight:500;}
@@ -137,14 +137,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .empty-title{font-size:15px;font-weight:500;color:var(--tx2);margin-bottom:5px;}
 .empty-sub{font-size:12px;color:var(--tx3);font-family:var(--mono);}
 
-/* â”€â”€ GRID (8 colunas agora com Entrega) â”€â”€ */
+/* ── GRID (8 colunas agora com Entrega) ── */
 .col-header,.comp-row{display:grid;grid-template-columns:minmax(80px,80px) minmax(100px,100px) 1fr minmax(100px,100px) minmax(110px,110px) minmax(130px,130px) minmax(90px,90px) minmax(55px,55px) minmax(50px,50px);}
 .cr-op{font-family:var(--mono);font-size:11px;color:var(--blue);font-weight:600;}
 .col-header{background:#F4F6FB;border-left:1px solid var(--border);border-right:1px solid var(--border);}
 .ch{padding:5px 10px;font-size:9px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;border-right:1px solid var(--border);}
 .ch:last-child{border-right:none;}
 
-/* â”€â”€ PEDIDO HEADER â”€â”€ */
+/* ── PEDIDO HEADER ── */
 .pedido-header{background:var(--topbar);color:#fff;border-radius:var(--r) var(--r) 0 0;padding:12px 16px;display:flex;align-items:center;flex-wrap:wrap;}
 .ph-item{padding:0 16px;border-right:1px solid rgba(255,255,255,.1);}.ph-item:first-child{padding-left:0;}
 .ph-lbl{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px;}
@@ -169,7 +169,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .op-none{color:var(--tx3);font-size:11px;font-family:var(--mono);}
 .tog{display:inline-block;transition:transform .18s;font-size:9px;}.tog.open{transform:rotate(90deg);}
 
-/* â”€â”€ ENTREGA BADGES â”€â”€ */
+/* ── ENTREGA BADGES ── */
 .entrega-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;font-family:var(--mono);white-space:nowrap;}
 .entrega-ok{background:var(--green-bg);color:var(--green);}
 .entrega-blue{background:#EBF0FB;color:#3B6FD4;}
@@ -177,7 +177,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .entrega-late{background:var(--red-bg);color:var(--red);animation:pulse-red 1.2s ease-in-out infinite;}
 @keyframes pulse-red{0%,100%{background:var(--red-bg);box-shadow:none;}50%{background:#f9b8b3;box-shadow:0 0 8px rgba(192,57,43,.55);}}
 
-/* â”€â”€ INLINE DATE INPUT â”€â”€ */
+/* ── INLINE DATE INPUT ── */
 .inline-date{border:1px solid transparent;border-radius:4px;padding:2px 5px;font-size:11px;font-family:var(--mono);color:var(--tx2);background:transparent;cursor:pointer;width:100%;outline:none;transition:border-color .15s,background .15s;}
 .inline-date:hover{border-color:var(--border2);background:var(--bg);}
 .inline-date:focus{border-color:var(--blue);background:var(--bg);}
@@ -187,7 +187,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .inline-date.date-late{color:var(--red);animation:pulse-red-text 1.2s ease-in-out infinite;}
 @keyframes pulse-red-text{0%,100%{opacity:1;}50%{opacity:.45;}}
 
-/* â”€â”€ OPS TABLE â”€â”€ */
+/* ── OPS TABLE ── */
 .ops-wrap{display:none;border-top:1px solid var(--border);overflow-x:auto;}.ops-wrap.open{display:block;}
 .ops-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;min-width:700px;}
 .ops-table thead{background:#F4F6FB;border-bottom:1px solid var(--border);}
@@ -199,7 +199,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .sit-badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:600;}
 .sit-a{background:var(--amber-bg);color:var(--amber);}.sit-c{background:var(--green-bg);color:var(--green);}.sit-p{background:#d4f5e2;color:#1a7a45;}
 
-/* â”€â”€ PEDIDOS SALVOS â”€â”€ */
+/* ── PEDIDOS SALVOS ── */
 .saved-layout{width:100%;padding:20px;overflow-y:auto;}
 .saved-table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
 .saved-table thead{background:#F4F6FB;}
@@ -213,7 +213,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .icon-btn:hover{background:var(--bg);border-color:var(--border2);}
 .icon-btn.danger:hover{background:var(--red-bg);border-color:rgba(192,57,43,.3);color:var(--red);}
 
-/* â”€â”€ CONTROLE DE PRODUÃ‡ÃƒO â”€â”€ */
+/* ── CONTROLE DE PRODUÇÃO ── */
 @keyframes rowPulse{
   0%,100%{background-color:#FDECEA;}
   50%{background-color:#F08080;}
@@ -309,7 +309,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .btn-finalizar.done{background:#EEF2FF;border-color:rgba(99,102,241,.4);color:#4338CA;}
 .btn-finalizar.done:hover{background:var(--red-bg);border-color:rgba(192,57,43,.3);color:var(--red);}
 
-/* â”€â”€ ADMIN â”€â”€ */
+/* ── ADMIN ── */
 .admin-layout{width:100%;padding:20px;overflow-y:auto;}
 .admin-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .admin-h1{font-size:15px;font-weight:600;color:var(--tx);}
@@ -325,7 +325,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .badge-inativo{background:var(--red-bg);color:var(--red);font-size:10px;font-weight:600;padding:2px 9px;border-radius:20px;}
 .u-inactive{opacity:.5;}
 
-/* â”€â”€ MODAL â”€â”€ */
+/* ── MODAL ── */
 .modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;}
 .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);width:400px;box-shadow:0 10px 40px rgba(0,0,0,.2);animation:fadeUp .2s ease;}
 .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
@@ -343,7 +343,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .btn-secondary{padding:8px 18px;background:var(--surface);color:var(--tx2);border:1px solid var(--border);border-radius:var(--rs);font-size:13px;cursor:pointer;font-family:var(--sans);}
 .btn-secondary:hover{background:var(--bg);}
 
-/* â”€â”€ PROGRESS / TOAST â”€â”€ */
+/* ── PROGRESS / TOAST ── */
 .progress-wrap{padding:0 18px 10px;display:none;}
 .progress-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
 .progress-fill{height:100%;background:var(--blue);border-radius:2px;width:0%;transition:width .3s;}
@@ -358,8 +358,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 
 <!-- LOADING -->
 <div id="loadingScreen">
-  <div class="ld-title">PCP Â· ALMOX</div>
-  <div class="ld-sub">Sistema de ProduÃ§Ã£o</div>
+  <div class="ld-title">PCP · ALMOX</div>
+  <div class="ld-sub">Sistema de Produção</div>
   <div class="ld-bar"><div class="ld-bar-fill" id="ldFill"></div></div>
   <div class="ld-status" id="ldStatus">inicializando...</div>
 </div>
@@ -373,23 +373,23 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
           <circle cx="11" cy="11" r="2" fill="#fff" stroke="none"/>
         </svg>
       </div>
-      <div class="login-t">PCP Â· ALMOX</div>
+      <div class="login-t">PCP · ALMOX</div>
     </div>
-    <div class="login-st">Sistema de ProduÃ§Ã£o</div>
+    <div class="login-st">Sistema de Produção</div>
     <div class="login-err" id="loginErr"></div>
     <div class="login-field">
-      <label class="login-label">UsuÃ¡rio</label>
-      <input class="login-input" type="text" id="loginUser" name="username" placeholder="nome de usuÃ¡rio" autocomplete="username">
+      <label class="login-label">Usuário</label>
+      <input class="login-input" type="text" id="loginUser" name="username" placeholder="nome de usuário" autocomplete="username">
     </div>
     <div class="login-field">
       <label class="login-label">Senha</label>
-      <input class="login-input" type="password" id="loginPass" name="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autocomplete="current-password">
+      <input class="login-input" type="password" id="loginPass" name="password" placeholder="••••••••" autocomplete="current-password">
     </div>
     <button class="login-btn" id="loginBtn" onclick="doLogin()">Entrar</button>
     <div style="margin-top:18px;padding:10px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;text-align:center">
       <span style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5">
-        âš ï¸ Esta ferramenta <strong style="color:rgba(255,255,255,0.6)">nÃ£o substitui</strong> o sistema oficial da empresa.<br>
-        Use apenas como apoio ao controle de produÃ§Ã£o.
+        ⚠️ Esta ferramenta <strong style="color:rgba(255,255,255,0.6)">não substitui</strong> o sistema oficial da empresa.<br>
+        Use apenas como apoio ao controle de produção.
       </span>
     </div>
   </div>
@@ -401,7 +401,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 <div class="topbar">
   <div class="topbar-left">
     <div class="logo-circle">S</div>
-    <div><div class="topbar-title">PCP Â· ALMOX</div><div class="topbar-sub">Extrator de Ordens de ProduÃ§Ã£o</div></div>
+    <div><div class="topbar-title">PCP · ALMOX</div><div class="topbar-sub">Extrator de Ordens de Produção</div></div>
   </div>
   <div class="topbar-right">
     <div class="db-indicator">
@@ -411,17 +411,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
     <span class="status-badge" id="statusBadge">AGUARDANDO</span>
     <div class="user-chip">
       <div class="user-av" id="userAv" style="background:#3B6FD4">?</div>
-      <div><div class="user-name" id="userName">â€”</div><div class="user-role" id="userRole">â€”</div></div>
+      <div><div class="user-name" id="userName">—</div><div class="user-role" id="userRole">—</div></div>
     </div>
-    <button class="btn-topbar admin-btn" id="adminBtn" onclick="goAdmin()" style="display:none">âš™ Admin</button>
+    <button class="btn-topbar admin-btn" id="adminBtn" onclick="goAdmin()" style="display:none">⚙ Admin</button>
     <button class="btn-topbar" onclick="doLogout()">Sair</button>
   </div>
 </div>
 
 <div class="tabs-bar">
-  <div class="tab active" id="tabExtrator" onclick="switchTab('extrator')"><span class="tab-icon">â˜°</span> Extrator</div>
-  <div class="tab" id="tabSaved" onclick="switchTab('saved')"><span class="tab-icon">â—«</span> Pedidos Salvos <span class="tab-count" id="savedCount">0</span></div>
-  <div class="tab" id="tabControle" onclick="switchTab('controle')"><span class="tab-icon">ðŸ“‹</span> Controle de ProduÃ§Ã£o</div>
+  <div class="tab active" id="tabExtrator" onclick="switchTab('extrator')"><span class="tab-icon">☰</span> Extrator</div>
+  <div class="tab" id="tabSaved" onclick="switchTab('saved')"><span class="tab-icon">◫</span> Pedidos Salvos <span class="tab-count" id="savedCount">0</span></div>
+  <div class="tab" id="tabControle" onclick="switchTab('controle')"><span class="tab-icon">📋</span> Controle de Produção</div>
 </div>
 
 <!-- PAGE: EXTRATOR -->
@@ -433,19 +433,19 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
         <label for="fileInput" class="upload-zone" id="uploadZone">
           <div class="upload-tri"></div>
           <div class="upload-primary">Clique ou arraste aqui</div>
-          <div class="upload-secondary">.xlsx Â· .xls Â· .csv</div>
+          <div class="upload-secondary">.xlsx · .xls · .csv</div>
         </label>
         <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;">
-        <div class="file-tag" id="fileTag"><span>ðŸ“„</span><span id="fileTagName"></span></div>
+        <div class="file-tag" id="fileTag"><span>📄</span><span id="fileTagName"></span></div>
       </div>
       <div class="sb-section" id="pedidoPanel" style="display:none">
         <div class="sb-label">Pedido Detectado</div>
-        <div class="pedido-num" id="pedidoNum">â€”</div>
-        <div class="pedido-cli" id="pedidoCli">â€”</div>
+        <div class="pedido-num" id="pedidoNum">—</div>
+        <div class="pedido-cli" id="pedidoCli">—</div>
         <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-          <div style="font-size:10px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Item / SequÃªncia</div>
+          <div style="font-size:10px;font-weight:600;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Item / Sequência</div>
           <div style="display:flex;align-items:center;gap:5px">
-            <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx2)" id="pedidoBaseDisp">â€”</span>
+            <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx2)" id="pedidoBaseDisp">—</span>
             <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--tx3)">-</span>
             <input type="text" id="pedidoItemInput" maxlength="10" placeholder="1"
               style="width:54px;font-family:var(--mono);font-size:14px;font-weight:600;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue);border-radius:4px;padding:3px 7px;outline:none;text-align:center"
@@ -458,22 +458,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
         <div class="sb-label">Totalizadores</div>
         <div class="stats-grid">
           <div class="stat-cell"><div class="stat-num" id="statComp">0</div><div class="stat-lbl">Itens</div></div>
-          <div class="stat-cell"><div class="stat-num" id="statOps">0</div><div class="stat-lbl">OperaÃ§Ãµes</div></div>
+          <div class="stat-cell"><div class="stat-num" id="statOps">0</div><div class="stat-lbl">Operações</div></div>
         </div>
       </div>
     </div>
     <div class="sb-actions">
-      <button class="btn-save" id="saveBtn" disabled onclick="executeSave()"><span>â–¶</span> Salvar no banco</button>
-      <button class="btn-clear" onclick="resetAll()">â†º Limpar tudo</button>
+      <button class="btn-save" id="saveBtn" disabled onclick="executeSave()"><span>▶</span> Salvar no banco</button>
+      <button class="btn-clear" onclick="resetAll()">↺ Limpar tudo</button>
     </div>
   </aside>
   <div class="main-ext">
     <div class="toolbar">
       <span class="toolbar-info" id="toolbarInfo">Nenhuma planilha importada</span>
       <div class="toolbar-btns">
-        <button class="tb-btn" onclick="expandAll()">â–¼ Expandir tudo</button>
-        <button class="tb-btn" onclick="collapseAll()">â–¶ Recolher tudo</button>
-        <button class="tb-btn" id="printExtBtn" onclick="imprimirExtrator()" style="display:none;border-color:rgba(59,111,212,.4);color:#3B6FD4">ðŸ–¨ Imprimir</button>
+        <button class="tb-btn" onclick="expandAll()">▼ Expandir tudo</button>
+        <button class="tb-btn" onclick="collapseAll()">▶ Recolher tudo</button>
+        <button class="tb-btn" id="printExtBtn" onclick="imprimirExtrator()" style="display:none;border-color:rgba(59,111,212,.4);color:#3B6FD4">🖨 Imprimir</button>
       </div>
     </div>
     <div class="progress-wrap" id="progressWrap">
@@ -482,13 +482,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
     </div>
     <div class="filter-bar" id="filterBar">
       <div class="search-box">
-        <span style="color:var(--tx3);font-size:12px">ðŸ”</span>
-        <input type="text" id="searchInput" placeholder="Buscar cÃ³digo, descriÃ§Ã£o..." oninput="applyFilter()">
+        <span style="color:var(--tx3);font-size:12px">🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar código, descrição..." oninput="applyFilter()">
       </div>
       <div class="chips">
         <span class="chip active" onclick="setFilter('all',this)">Todos</span>
-        <span class="chip" onclick="setFilter('com-ops',this)">Com operaÃ§Ãµes</span>
-        <span class="chip" onclick="setFilter('sem-ops',this)">Sem operaÃ§Ãµes</span>
+        <span class="chip" onclick="setFilter('com-ops',this)">Com operações</span>
+        <span class="chip" onclick="setFilter('sem-ops',this)">Sem operações</span>
       </div>
       <div class="filter-sep"></div>
       <span class="filter-label">Op:</span>
@@ -522,7 +522,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   <div class="saved-layout">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
       <div style="font-size:15px;font-weight:600;color:var(--tx)">Pedidos Salvos</div>
-      <button class="tb-btn" onclick="loadSavedList()">â†º Atualizar</button>
+      <button class="tb-btn" onclick="loadSavedList()">↺ Atualizar</button>
     </div>
     <div id="savedListArea">
       <div class="empty-state" style="height:300px">
@@ -538,21 +538,21 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   </div>
 </div>
 
-<!-- PAGE: CONTROLE DE PRODUÃ‡ÃƒO -->
+<!-- PAGE: CONTROLE DE PRODUÇÃO -->
 <div class="page" id="pageControle">
   <div class="controle-layout">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
       <div>
-        <div style="font-size:15px;font-weight:600;color:var(--tx)">Controle de ProduÃ§Ã£o</div>
+        <div style="font-size:15px;font-weight:600;color:var(--tx)">Controle de Produção</div>
         <div style="font-size:11px;color:var(--tx3);margin-top:2px">
-          <span style="color:var(--green);font-weight:600">â—</span> &gt;30 dias &nbsp;
-          <span style="color:#3B6FD4;font-weight:600">â—</span> 8â€“30 dias &nbsp;
-          <span style="color:var(--amber);font-weight:600">â—</span> â‰¤7 dias &nbsp;
-          <span style="color:var(--red);font-weight:600">â—</span> â‰¤2 dias ou vencido &nbsp;
-          <span style="color:#818CF8;font-weight:600">â—</span> Finalizado
+          <span style="color:var(--green);font-weight:600">●</span> &gt;30 dias &nbsp;
+          <span style="color:#3B6FD4;font-weight:600">●</span> 8–30 dias &nbsp;
+          <span style="color:var(--amber);font-weight:600">●</span> ≤7 dias &nbsp;
+          <span style="color:var(--red);font-weight:600">●</span> ≤2 dias ou vencido &nbsp;
+          <span style="color:#818CF8;font-weight:600">●</span> Finalizado
         </div>
       </div>
-      <button class="tb-btn" onclick="loadControle()">â†º Atualizar</button>
+      <button class="tb-btn" onclick="loadControle()">↺ Atualizar</button>
     </div>
     <div id="controleArea">
       <div class="empty-state" style="height:300px"><div class="empty-title">Carregando...</div></div>
@@ -560,15 +560,15 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   </div>
 </div>
 
-<!-- PAGE: ADMIN (sem aba, acessado pelo botÃ£o no topo) -->
+<!-- PAGE: ADMIN (sem aba, acessado pelo botão no topo) -->
 <div class="page" id="pageAdmin">
   <div class="admin-layout">
     <div class="admin-top">
       <div style="display:flex;align-items:center;gap:12px">
-        <button class="btn-secondary" onclick="switchTab('extrator')" style="font-size:12px;padding:6px 14px">â† Voltar</button>
-        <div class="admin-h1">Gerenciamento de UsuÃ¡rios</div>
+        <button class="btn-secondary" onclick="switchTab('extrator')" style="font-size:12px;padding:6px 14px">← Voltar</button>
+        <div class="admin-h1">Gerenciamento de Usuários</div>
       </div>
-      <button class="btn-primary" onclick="openUserModal()">+ Novo UsuÃ¡rio</button>
+      <button class="btn-primary" onclick="openUserModal()">+ Novo Usuário</button>
     </div>
     <div id="userListArea">
       <div class="empty-state" style="height:200px"><div class="empty-title">Carregando...</div></div>
@@ -578,32 +578,32 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 
 </div><!-- /mainApp -->
 
-<!-- MODAL USUÃRIO -->
+<!-- MODAL USUÁRIO -->
 <div class="modal-bd" id="userModal" style="display:none" onclick="if(event.target===this)closeUserModal()">
   <div class="modal-box">
     <div class="modal-head">
-      <span class="modal-title" id="modalTitle">Novo UsuÃ¡rio</span>
-      <button class="modal-close" onclick="closeUserModal()">Ã—</button>
+      <span class="modal-title" id="modalTitle">Novo Usuário</span>
+      <button class="modal-close" onclick="closeUserModal()">×</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="modalUserId">
       <div class="form-field">
         <label class="form-label">Nome completo</label>
-        <input class="form-input" id="mNome" type="text" placeholder="Ex: JoÃ£o Silva">
+        <input class="form-input" id="mNome" type="text" placeholder="Ex: João Silva">
       </div>
       <div class="form-field">
-        <label class="form-label">UsuÃ¡rio (login)</label>
+        <label class="form-label">Usuário (login)</label>
         <input class="form-input" id="mUsername" type="text" placeholder="Ex: joao.silva">
       </div>
       <div class="form-field">
         <label class="form-label">Senha <span id="senhaHint" style="font-size:10px;font-weight:400;color:var(--tx3);text-transform:none;letter-spacing:0">(deixe em branco para manter)</span></label>
-        <input class="form-input" id="mSenha" type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+        <input class="form-input" id="mSenha" type="password" placeholder="••••••••">
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="form-field">
           <label class="form-label">Perfil</label>
           <select class="form-select" id="mPerfil" onchange="toggleExpiraField()">
-            <option value="Funcionario">FuncionÃ¡rio</option>
+            <option value="Funcionario">Funcionário</option>
             <option value="Admin">Admin</option>
           </select>
         </div>
@@ -627,12 +627,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 <div class="toast-stack" id="toasts"></div>
 
 <script>
-// â”€â”€ SESSÃƒO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── SESSÃO ────────────────────────────────────────────────────────────────────
 const SESSION_KEY = 'almox_session';
 let currentUser = null;
 
 function esc(s){
-  if(s===null||s===undefined)return 'â€”';
+  if(s===null||s===undefined)return '—';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 function requireAdmin(){
@@ -657,17 +657,17 @@ function isSessionValid(s){
 let _inactivityTimer;
 function resetInactivityTimer(){
   clearTimeout(_inactivityTimer);
-  _inactivityTimer=setTimeout(()=>{toast('SessÃ£o encerrada por inatividade.','warn');setTimeout(doLogout,2000);},30*60*1000);
+  _inactivityTimer=setTimeout(()=>{toast('Sessão encerrada por inatividade.','warn');setTimeout(doLogout,2000);},30*60*1000);
 }
 ['click','keydown','mousemove','touchstart'].forEach(ev=>document.addEventListener(ev,resetInactivityTimer,{passive:true}));
 
-// â”€â”€ SUPABASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// SECURITY: SB_KEY Ã© anon/publishable key (segura para frontend com RLS ativado)
+// ── SUPABASE ──────────────────────────────────────────────────────────────────
+// SECURITY: SB_KEY é anon/publishable key (segura para frontend com RLS ativado)
 // NUNCA use service_role key no frontend. Configure RLS em todas as tabelas.
 const SB_URL='https://lavehpbeizrqcuaiqcpx.supabase.co/rest/v1';
 const SB_KEY='sb_publishable_Q6SWGBjlO3TIdlO7aq16qQ_0QmTZX1R';
 // SECURITY: Headers base - Authorization usa anon key (backend valida via RLS)
-// Para produÃ§Ã£o: substituir por Supabase Auth JWT (supabase.auth.getSession())
+// Para produção: substituir por Supabase Auth JWT (supabase.auth.getSession())
 function getHeaders(extra={}){
   return {
     'Content-Type':'application/json',
@@ -690,8 +690,8 @@ async function dbPatch(t,p,b){const h={...HEADERS,'Prefer':'return=minimal'};con
 async function dbDelete(t,p){const r=await fetch(`${SB_URL}/${t}?${p}`,{method:'DELETE',headers:HEADERS});if(!r.ok){const e=await r.json();throw new Error(e.message||r.statusText);}}
 function setDbStatus(ok,msg){document.getElementById('dbDot').className='db-dot '+(ok?'ok':'err');document.getElementById('sbStatus').textContent=ok?'banco conectado':'erro: '+msg;}
 
-// â”€â”€ HELPERS DATA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function fmtDate(s){if(!s)return'â€”';const[y,m,d]=s.split('-');return`${d}/${m}/${y}`;}
+// ── HELPERS DATA ──────────────────────────────────────────────────────────────
+function fmtDate(s){if(!s)return'—';const[y,m,d]=s.split('-');return`${d}/${m}/${y}`;}
 function parseDataUTC(s){
   if(!s)return null;
   // Garante que funciona com timestamp completo do Supabase (ex: 2026-06-06T03:00:00+00:00)
@@ -718,23 +718,23 @@ function entregaDias(s){
   return Math.ceil((alvo-hoje)/86400000);
 }
 
-// â”€â”€ AUTH â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── AUTH ──────────────────────────────────────────────────────────────────────
 async function doLogin(){
   const user=document.getElementById('loginUser').value.trim();
   const pass=document.getElementById('loginPass').value;
   const btn=document.getElementById('loginBtn');
   document.getElementById('loginErr').classList.remove('show');
-  if(!user||!pass){showLoginErr('Preencha usuÃ¡rio e senha.');return;}
+  if(!user||!pass){showLoginErr('Preencha usuário e senha.');return;}
   btn.disabled=true;btn.textContent='Entrando...';
   try{
-    // SECURITY: Sanitiza input - permite apenas alfanumÃ©rico, ponto, hÃ­fen e underscore
+    // SECURITY: Sanitiza input - permite apenas alfanumérico, ponto, hífen e underscore
     const safeUser = user.replace(/[^a-zA-Z0-9._\-]/g, '');
-    if(safeUser !== user){showLoginErr('UsuÃ¡rio contÃ©m caracteres invÃ¡lidos.');return;}
+    if(safeUser !== user){showLoginErr('Usuário contém caracteres inválidos.');return;}
     const rows=await dbGet('usuarios',`username=eq.${encodeURIComponent(safeUser)}&select=id,nome,username,perfil,cor,ativo,expira_em,senha_hash&limit=1`);
-    if(!rows?.length){showLoginErr('UsuÃ¡rio ou senha incorretos.');return;}
+    if(!rows?.length){showLoginErr('Usuário ou senha incorretos.');return;}
     const u=rows[0];
-    if(!u.ativo){showLoginErr('UsuÃ¡rio inativo. Contate o administrador.');return;}
-    if(u.senha_hash!==pass){showLoginErr('UsuÃ¡rio ou senha incorretos.');return;}
+    if(!u.ativo){showLoginErr('Usuário inativo. Contate o administrador.');return;}
+    if(u.senha_hash!==pass){showLoginErr('Usuário ou senha incorretos.');return;}
     if(u.perfil!=='Admin'&&u.expira_em&&new Date(u.expira_em)<new Date()){showLoginErr('Acesso expirado. Contate o administrador.');return;}
     dbPatch('usuarios',`id=eq.${u.id}`,{ultimo_acesso:new Date().toISOString()}).catch(()=>{});
     setSession({id:u.id,nome:u.nome,username:u.username,perfil:u.perfil,cor:u.cor||'#4f8ef7',expira_em:u.expira_em});
@@ -768,12 +768,12 @@ async function initApp(){
   catch(e){setDbStatus(false,e.message);}
 }
 
-// â”€â”€ BOOT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── BOOT ──────────────────────────────────────────────────────────────────────
 function bootApp(){
   const fill=document.getElementById('ldFill');
   const status=document.getElementById('ldStatus');
   if(!fill||!status){
-    // DOM nÃ£o pronto ainda, tenta novamente
+    // DOM não pronto ainda, tenta novamente
     setTimeout(bootApp,100);return;
   }
   let pct=0;
@@ -781,7 +781,7 @@ function bootApp(){
   setTimeout(()=>{
     clearInterval(iv);
     fill.style.width='100%';
-    status.textContent='verificando sessÃ£o...';
+    status.textContent='verificando sessão...';
     setTimeout(()=>{
       const ld=document.getElementById('loadingScreen');
       const ls=document.getElementById('loginScreen');
@@ -808,7 +808,7 @@ function bootApp(){
 window.addEventListener('load', bootApp);
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none')doLogin();});
 
-// â”€â”€ CONVERSÃƒO EXCEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── CONVERSÃO EXCEL ───────────────────────────────────────────────────────────
 function xlDate(v){
   if(v===''||v==null)return'';
   if(v instanceof Date)return v.toLocaleDateString('pt-BR');
@@ -825,12 +825,12 @@ function xlTime(v){
   return`${String(Math.floor(totalMin/60)%24).padStart(2,'0')}:${String(totalMin%60).padStart(2,'0')}`;
 }
 
-// â”€â”€ ESTADO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── ESTADO ────────────────────────────────────────────────────────────────────
 let state={pedido:'',pedidoSeq:'',cliente:'',data_entrega:'',componentes:[]};
 let existingPedidoId=null,filterMode='all',searchTerm='';
 let activeOps=new Set();
 
-// â”€â”€ TABS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── TABS ──────────────────────────────────────────────────────────────────────
 function switchTab(tab){
   ['tabExtrator','tabSaved','tabControle'].forEach(id=>document.getElementById(id)?.classList.remove('active'));
   ['pageExtrator','pageSaved','pageControle','pageAdmin'].forEach(id=>document.getElementById(id)?.classList.remove('active'));
@@ -839,7 +839,7 @@ function switchTab(tab){
   else if(tab==='controle'){document.getElementById('tabControle').classList.add('active');document.getElementById('pageControle').classList.add('active');loadControle();}
 }
 function goAdmin(){
-  // SECURITY: Dupla verificaÃ§Ã£o de perfil antes de renderizar painel admin
+  // SECURITY: Dupla verificação de perfil antes de renderizar painel admin
   if(!requireAdmin()) return;
   ['tabExtrator','tabSaved','tabControle'].forEach(id=>document.getElementById(id)?.classList.remove('active'));
   ['pageExtrator','pageSaved','pageControle'].forEach(id=>document.getElementById(id)?.classList.remove('active'));
@@ -847,13 +847,13 @@ function goAdmin(){
   loadUserList();
 }
 
-// â”€â”€ EXTRAÃ‡ÃƒO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── EXTRAÇÃO ──────────────────────────────────────────────────────────────────
 function extractFromRows(rows){
   const componentes=[];let pedido='',cliente='',current=null,pendingOps=[],pendingOP='';
   for(let i=0;i<rows.length;i++){
     const row=rows[i];
     if(/pedido:/i.test(row)){const m=row.match(/pedido:\s*(\d+)/i);if(m)pedido=m[1];const cm=row.match(/cliente:\s*\d+\s+(.+?)(?:\s{2,}|$)/i);if(cm)cliente=cm[1].trim();}
-    if(/ordem\s+de\s+produ[Ã§c][Ã£a]o\s*:/i.test(row)){
+    if(/ordem\s+de\s+produ[çc][ãa]o\s*:/i.test(row)){
       const nums=(row.match(/\b\d+\b/g)||[]);
       const op1=nums[0]||'';const op2=nums[1]||'';
       pendingOP=op1&&op2?`${op1}/${op2}`:(op1||op2);
@@ -865,11 +865,11 @@ function extractFromRows(rows){
         current.op=pendingOP;
         componentes.push(current);pendingOps=[];pendingOP='';
       }
-      const dM=row.match(/([A-ZÃÃ‡ÃƒÃ•]{2,}[\d]+(?:\.[\d]+)+)/);let desenho=dM?dM[0]:'';
+      const dM=row.match(/([A-ZÁÇÃÕ]{2,}[\d]+(?:\.[\d]+)+)/);let desenho=dM?dM[0]:'';
       const qM=row.match(/(\d+(?:[.,]\d+)?)\s*PC/i);let quantidade=qM?qM[1].replace(',','.'):'';
       let descricao=compM[3].trim();
       if(desenho)descricao=descricao.replace(desenho,'').trim();
-      descricao=descricao.replace(/\s*[-â€“]?\s*\d+(?:[.,]\d+)?\s*PC.*/i,'').trim().replace(/[-â€“\s]+$/,'').trim();
+      descricao=descricao.replace(/\s*[-–]?\s*\d+(?:[.,]\d+)?\s*PC.*/i,'').trim().replace(/[-–\s]+$/,'').trim();
       current={posicao:compM[1],codigo:compM[2],descricao,desenho,quantidade,operacoes:[]};
     }
     const parts=row.split('\t');
@@ -898,10 +898,10 @@ async function handleFile(file){
       state=extractFromRows(rows);state.pedidoSeq=state.pedido;
       document.getElementById('fileTag').style.display='flex';document.getElementById('fileTagName').textContent=file.name;
       document.getElementById('pedidoPanel').style.display='block';document.getElementById('pedidoNum').textContent='...';
-      document.getElementById('pedidoCli').textContent=state.cliente||'â€”';document.getElementById('filterBar').style.display='flex';
+      document.getElementById('pedidoCli').textContent=state.cliente||'—';document.getElementById('filterBar').style.display='flex';
       await checkExisting();renderResult();
       const tot=state.componentes.reduce((s,c)=>s+(c.operacoes?.length||0),0);
-      toast(`ExtraÃ­dos: ${state.componentes.length} itens Â· ${tot} operaÃ§Ãµes`,'success');
+      toast(`Extraídos: ${state.componentes.length} itens · ${tot} operações`,'success');
     }catch(err){toast('Erro ao processar o arquivo','error');console.error(err);}
   };
   reader.readAsArrayBuffer(file);
@@ -919,7 +919,7 @@ async function checkExisting(){
     if(todos.length){let max=0;todos.forEach(p=>{const m=p.numero.match(/-(\d+)$/);max=Math.max(max,m?parseInt(m[1]):1);});sugItem=String(max+1);}
     document.getElementById('pedidoItemInput').value=sugItem;
     existingPedidoId=null;state.pedidoSeq=state.pedido+'-'+sugItem;
-    setFlag('novo');document.getElementById('statusBadge').textContent='NÂº '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
+    setFlag('novo');document.getElementById('statusBadge').textContent='Nº '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
     document.getElementById('saveBtn').disabled=false;
   }catch(e){
     document.getElementById('pedidoItemInput').value='1';
@@ -932,21 +932,21 @@ function onPedidoItemChange(){
   if(!state.pedido)return;
   state.pedidoSeq=val?state.pedido+'-'+val:state.pedido;
   setFlag('novo');
-  document.getElementById('statusBadge').textContent='NÂº '+state.pedidoSeq;
+  document.getElementById('statusBadge').textContent='Nº '+state.pedidoSeq;
   document.getElementById('statusBadge').className='status-badge ok';
   renderResult();
 }
 
 function setFlag(t){
   const el=document.getElementById('pedidoFlag');
-  if(t==='novo')el.innerHTML=`<span class="pedido-flag flag-novo">âœ“ NOVO Â· ${state.pedidoSeq}</span>`;
-  if(t==='seq') el.innerHTML=`<span class="pedido-flag flag-exist">+ SEQUÃŠNCIA Â· ${state.pedidoSeq}</span>`;
-  if(t==='saved')el.innerHTML=`<span class="pedido-flag flag-saved">âœ“ SALVO Â· ${state.pedidoSeq}</span>`;
+  if(t==='novo')el.innerHTML=`<span class="pedido-flag flag-novo">✓ NOVO · ${state.pedidoSeq}</span>`;
+  if(t==='seq') el.innerHTML=`<span class="pedido-flag flag-exist">+ SEQUÊNCIA · ${state.pedidoSeq}</span>`;
+  if(t==='saved')el.innerHTML=`<span class="pedido-flag flag-saved">✓ SALVO · ${state.pedidoSeq}</span>`;
 }
 
 async function executeSave(){
   if(!state.pedidoSeq){toast('Nenhum dado para salvar','error');return;}
-  const btn=document.getElementById('saveBtn');btn.disabled=true;btn.textContent='â³ Salvando...';
+  const btn=document.getElementById('saveBtn');btn.disabled=true;btn.textContent='⏳ Salvando...';
   const pw=document.getElementById('progressWrap'),pf=document.getElementById('progressFill'),pl=document.getElementById('progressLabel');
   pw.style.display='block';pf.style.width='0%';
   try{
@@ -963,8 +963,8 @@ async function executeSave(){
         if(comp.id) await dbPatch('componentes',`id=eq.${comp.id}`,{data_entrega:comp.data_entrega||null});
       }
       pf.style.width='100%';pl.textContent='Datas atualizadas!';setTimeout(()=>{pw.style.display='none';},1500);
-      btn.textContent='âœ“ Atualizado!';
-      document.getElementById('statusBadge').textContent='ATUALIZADO Â· '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
+      btn.textContent='✓ Atualizado!';
+      document.getElementById('statusBadge').textContent='ATUALIZADO · '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
       toast(`Datas do pedido ${state.pedidoSeq} atualizadas!`,'success');
       return;
     }
@@ -981,13 +981,13 @@ async function executeSave(){
         await dbPost('operacoes',comp.operacoes.map(op=>({componente_id:compId,pedido_id:pedidoId,est:op.est,seq:op.seq,operacao:op.op,descricao:op.desc,qtd_prevista:parseFloat(op.qtd_prev)||0,qtd_realizada:parseFloat(op.qtd_real)||0,inicio_data:op.inicio_data||null,inicio_hora:op.inicio_hora||null,situacao:op.situacao||'Aberta'})));
       }
     }
-    pf.style.width='100%';pl.textContent='ConcluÃ­do!';setTimeout(()=>{pw.style.display='none';},1500);
-    setFlag('saved');btn.textContent='âœ“ Salvo!';
-    document.getElementById('statusBadge').textContent='SALVO Â· '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
+    pf.style.width='100%';pl.textContent='Concluído!';setTimeout(()=>{pw.style.display='none';},1500);
+    setFlag('saved');btn.textContent='✓ Salvo!';
+    document.getElementById('statusBadge').textContent='SALVO · '+state.pedidoSeq;document.getElementById('statusBadge').className='status-badge ok';
     loadSavedCount();toast(`Pedido ${state.pedidoSeq} salvo!`,'success');
   }catch(err){
     console.error(err);pw.style.display='none';toast('Erro: '+err.message,'error');
-    btn.disabled=false;btn.innerHTML='<span>â–¶</span> Salvar no banco';
+    btn.disabled=false;btn.innerHTML='<span>▶</span> Salvar no banco';
   }
 }
 
@@ -1004,15 +1004,15 @@ function normalizarSituacoes(ops){
 }
 
 function getUltimaOp(ops){
-  if(!ops||!ops.length)return{label:'â€”',cls:'op-none',op:'â€”'};
+  if(!ops||!ops.length)return{label:'—',cls:'op-none',op:'—'};
   const norm=normalizarSituacoes(ops);
   const comInicio=norm.filter(function(o){return o.inicio_data&&o.inicio_data!=='';});
   if(comInicio.length){
     const ultima=comInicio.sort(function(a,b){return parseInt(b.seq)-parseInt(a.seq);})[0];
     const isConcluida=/concl|finaliz/i.test(ultima.situacao||'');
-    return{label:ultima.desc||ultima.op,cls:isConcluida?'op-concluida':'op-andamento',op:ultima.op||'â€”'};
+    return{label:ultima.desc||ultima.op,cls:isConcluida?'op-concluida':'op-andamento',op:ultima.op||'—'};
   }
-  return{label:norm[0].desc||norm[0].op,cls:'op-aberta',op:norm[0].op||'â€”'};
+  return{label:norm[0].desc||norm[0].op,cls:'op-aberta',op:norm[0].op||'—'};
 }
 
 function getFiltered(){
@@ -1030,17 +1030,17 @@ function renderResult(){
   const filtered=getFiltered();
   const totalOps=state.componentes.reduce((s,c)=>s+(c.operacoes?.length||0),0);
   document.getElementById('statComp').textContent=state.componentes.length;document.getElementById('statOps').textContent=totalOps;
-  document.getElementById('toolbarInfo').innerHTML=`<strong>Pedido ${state.pedidoSeq||'â€”'}</strong> Â· ${state.componentes.length} itens Â· ${totalOps} ops Â· mostrando <strong>${filtered.length}</strong>`;
+  document.getElementById('toolbarInfo').innerHTML=`<strong>Pedido ${state.pedidoSeq||'—'}</strong> · ${state.componentes.length} itens · ${totalOps} ops · mostrando <strong>${filtered.length}</strong>`;
   if(!filtered.length){area.innerHTML=`<div class="empty-state" style="height:300px"><div class="empty-title">Nenhum item encontrado</div></div>`;return;}
   let html=`<div class="pedido-header">
-    <div class="ph-item"><div class="ph-lbl">Pedido</div><div class="ph-val">${state.pedidoSeq||'â€”'}</div></div>
-    <div class="ph-item"><div class="ph-lbl">Cliente</div><div class="ph-val">${state.cliente||'â€”'}</div></div>
+    <div class="ph-item"><div class="ph-lbl">Pedido</div><div class="ph-val">${state.pedidoSeq||'—'}</div></div>
+    <div class="ph-item"><div class="ph-lbl">Cliente</div><div class="ph-val">${state.cliente||'—'}</div></div>
     <div class="ph-item"><div class="ph-lbl">Itens</div><div class="ph-val">${state.componentes.length}</div></div>
-    <div class="ph-item"><div class="ph-lbl">OperaÃ§Ãµes</div><div class="ph-val">${totalOps}</div></div>
-    <div class="ph-actions"><button class="ph-btn" onclick="expandAll()">â–¼ Expandir tudo</button><button class="ph-btn" onclick="collapseAll()">â–¶ Recolher tudo</button></div>
+    <div class="ph-item"><div class="ph-lbl">Operações</div><div class="ph-val">${totalOps}</div></div>
+    <div class="ph-actions"><button class="ph-btn" onclick="expandAll()">▼ Expandir tudo</button><button class="ph-btn" onclick="collapseAll()">▶ Recolher tudo</button></div>
   </div>
   <div class="col-header">
-    <div class="ch">Pos.</div><div class="ch">CÃ³digo</div><div class="ch">DescriÃ§Ã£o</div>
+    <div class="ch">Pos.</div><div class="ch">Código</div><div class="ch">Descrição</div>
     <div class="ch">OP</div><div class="ch">Atual</div><div class="ch">Desenho</div><div class="ch">Entrega</div>
     <div class="ch">Qtd</div><div class="ch" style="text-align:center">Ops</div>
   </div>`;
@@ -1050,26 +1050,26 @@ function renderResult(){
     const opsNorm=normalizarSituacoes(comp.operacoes);
     const opsHtml=opsNorm&&opsNorm.length?opsNorm.map(op=>{
       const s=(op.situacao||'').toLowerCase();let cls='sit-a',sitLabel='Aberta';
-      if(/concl|finaliz/i.test(s)){cls='sit-c';sitLabel='ConcluÃ­da';}
+      if(/concl|finaliz/i.test(s)){cls='sit-c';sitLabel='Concluída';}
       else if(op.inicio_data&&op.inicio_data!==''){cls='sit-p';sitLabel='Em Processo';}
-      return`<tr><td>${op.est||'â€”'}</td><td>${op.seq||'â€”'}</td><td>${op.op||'â€”'}</td><td>${op.desc||'â€”'}</td><td>${op.qtd_prev||'â€”'}</td><td>${op.qtd_real||'â€”'}</td><td>${op.inicio_data?op.inicio_data+' '+op.inicio_hora:'â€”'}</td><td><span class="sit-badge ${cls}">${sitLabel}</span></td></tr>`;
-    }).join(''):`<tr><td colspan="8" style="padding:12px;text-align:center;color:var(--tx3);font-size:11px">Sem operaÃ§Ãµes</td></tr>`;
-    const qty=comp.quantidade?parseFloat(comp.quantidade)%1===0?parseInt(comp.quantidade):parseFloat(comp.quantidade):'â€”';
+      return`<tr><td>${op.est||'—'}</td><td>${op.seq||'—'}</td><td>${op.op||'—'}</td><td>${op.desc||'—'}</td><td>${op.qtd_prev||'—'}</td><td>${op.qtd_real||'—'}</td><td>${op.inicio_data?op.inicio_data+' '+op.inicio_hora:'—'}</td><td><span class="sit-badge ${cls}">${sitLabel}</span></td></tr>`;
+    }).join(''):`<tr><td colspan="8" style="padding:12px;text-align:center;color:var(--tx3);font-size:11px">Sem operações</td></tr>`;
+    const qty=comp.quantidade?parseFloat(comp.quantidade)%1===0?parseInt(comp.quantidade):parseFloat(comp.quantidade):'—';
     const ultima=getUltimaOp(comp.operacoes);
     html+=`<div class="comp-wrap${isLast?' last':''}">
       <div class="comp-row${isLast?' last-row':''}" onclick="toggleCard(${idx})">
         <div class="cr-cell cr-pos">${comp.posicao}</div>
         <div class="cr-cell cr-cod">${comp.codigo}</div>
         <div class="cr-cell cr-desc">${comp.descricao}</div>
-        <div class="cr-cell cr-op">${comp.op||'â€”'}</div>
-        <div class="cr-cell cr-atual">${ultima.cls==='op-none'?`<span class="op-none">â€”</span>`:`<span class="op-badge ${ultima.cls}">${ultima.label}</span>`}</div>
-        <div class="cr-cell cr-desenho">${comp.desenho||'â€”'}</div>
+        <div class="cr-cell cr-op">${comp.op||'—'}</div>
+        <div class="cr-cell cr-atual">${ultima.cls==='op-none'?`<span class="op-none">—</span>`:`<span class="op-badge ${ultima.cls}">${ultima.label}</span>`}</div>
+        <div class="cr-cell cr-desenho">${comp.desenho||'—'}</div>
         <div class="cr-cell" style="align-items:center"><input type="date" class="inline-date${comp.data_entrega?' date-'+entregaCls(comp.data_entrega):''}" value="${comp.data_entrega||''}" onchange="updateCompDate(${compIdx},this.value)" onclick="event.stopPropagation()" title="${comp.data_entrega?fmtDate(comp.data_entrega):'Sem prazo'}"></div>
         <div class="cr-cell cr-qty">${qty}</div>
-        <div class="cr-cell cr-ops"><span class="tog" id="tog-${idx}">â–¶</span> ${comp.operacoes?.length||0}</div>
+        <div class="cr-cell cr-ops"><span class="tog" id="tog-${idx}">▶</span> ${comp.operacoes?.length||0}</div>
       </div>
       <div class="ops-wrap" id="ops-${idx}">
-        <table class="ops-table"><thead><tr><th>EST</th><th>SEQ</th><th>OP</th><th>DESCRIÃ‡ÃƒO</th><th>QTD.PREV</th><th>QTD.REAL</th><th>INÃCIO</th><th>SITUAÃ‡ÃƒO</th></tr></thead>
+        <table class="ops-table"><thead><tr><th>EST</th><th>SEQ</th><th>OP</th><th>DESCRIÇÃO</th><th>QTD.PREV</th><th>QTD.REAL</th><th>INÍCIO</th><th>SITUAÇÃO</th></tr></thead>
         <tbody>${opsHtml}</tbody></table>
       </div>
     </div>`;
@@ -1077,15 +1077,15 @@ function renderResult(){
   area.innerHTML=html;
 }
 
-function toggleCard(idx){const ops=document.getElementById('ops-'+idx),tog=document.getElementById('tog-'+idx);if(!ops)return;const open=ops.classList.toggle('open');tog.classList.toggle('open',open);tog.textContent=open?'â–¼':'â–¶';}
-function expandAll(){document.querySelectorAll('.ops-wrap').forEach(el=>el.classList.add('open'));document.querySelectorAll('.tog').forEach(el=>{el.classList.add('open');el.textContent='â–¼';});}
-function collapseAll(){document.querySelectorAll('.ops-wrap').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.tog').forEach(el=>{el.classList.remove('open');el.textContent='â–¶';});}
+function toggleCard(idx){const ops=document.getElementById('ops-'+idx),tog=document.getElementById('tog-'+idx);if(!ops)return;const open=ops.classList.toggle('open');tog.classList.toggle('open',open);tog.textContent=open?'▼':'▶';}
+function expandAll(){document.querySelectorAll('.ops-wrap').forEach(el=>el.classList.add('open'));document.querySelectorAll('.tog').forEach(el=>{el.classList.add('open');el.textContent='▼';});}
+function collapseAll(){document.querySelectorAll('.ops-wrap').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.tog').forEach(el=>{el.classList.remove('open');el.textContent='▶';});}
 function setFilter(mode,el){filterMode=mode;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderResult();}
 function toggleOp(op,el){if(activeOps.has(op)){activeOps.delete(op);el.classList.remove('active');}else{activeOps.add(op);el.classList.add('active');}renderResult();}
 function applyFilter(){searchTerm=document.getElementById('searchInput').value;renderResult();}
 function updateCompDate(idx,val){if(state.componentes[idx])state.componentes[idx].data_entrega=val||'';}
 
-// â”€â”€ PEDIDOS SALVOS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── PEDIDOS SALVOS ────────────────────────────────────────────────────────────
 async function loadSavedCount(){try{const d=await dbGet('pedidos','select=id');document.getElementById('savedCount').textContent=d?.length||0;}catch(e){}}
 
 async function loadSavedList(){
@@ -1094,21 +1094,21 @@ async function loadSavedList(){
   try{
     const pedidos=await dbGet('pedidos','select=id,numero,cliente,data_entrega,data_importacao,data_atualizacao,finalizado,componentes(count),operacoes(count)&order=data_importacao.desc');
     if(!pedidos?.length){area.innerHTML='<div class="empty-state" style="height:300px"><div class="empty-title">Nenhum pedido salvo</div></div>';return;}
-    let html=`<table class="saved-table"><thead><tr><th>NÂº Pedido</th><th>Cliente</th><th>Entrega</th><th>Itens</th><th>OperaÃ§Ãµes</th><th>Importado em</th><th>AÃ§Ãµes</th></tr></thead><tbody>`;
+    let html=`<table class="saved-table"><thead><tr><th>Nº Pedido</th><th>Cliente</th><th>Entrega</th><th>Itens</th><th>Operações</th><th>Importado em</th><th>Ações</th></tr></thead><tbody>`;
     pedidos.forEach(p=>{
-      const dt=p.data_importacao?new Date(p.data_importacao).toLocaleString('pt-BR'):'â€”';
+      const dt=p.data_importacao?new Date(p.data_importacao).toLocaleString('pt-BR'):'—';
       const cli=(p.cliente||'').replace(/'/g,"\\'");
       const fin=!!p.finalizado;
       const eCls=entregaCls(p.data_entrega);
-      const eBadge=fin?`<span class="entrega-badge" style="background:#EEF2FF;color:#4338CA;border:1px solid rgba(99,102,241,.25)">âœ“ ConcluÃ­do</span>`:p.data_entrega?`<span class="entrega-badge entrega-${eCls}">${fmtDate(p.data_entrega)}</span>`:'â€”';
+      const eBadge=fin?`<span class="entrega-badge" style="background:#EEF2FF;color:#4338CA;border:1px solid rgba(99,102,241,.25)">✓ Concluído</span>`:p.data_entrega?`<span class="entrega-badge entrega-${eCls}">${fmtDate(p.data_entrega)}</span>`:'—';
       html+=`<tr${fin?' style="opacity:.72"':''}>
         <td class="mono" style="font-weight:600;color:var(--blue)">${p.numero}</td>
-        <td>${p.cliente||'â€”'}</td><td>${eBadge}</td>
+        <td>${p.cliente||'—'}</td><td>${eBadge}</td>
         <td class="mono">${p.componentes?.[0]?.count??0}</td><td class="mono">${p.operacoes?.[0]?.count??0}</td>
         <td class="mono" style="color:var(--tx2);font-size:11px">${dt}</td>
         <td><div style="display:flex;gap:6px">
-          <button class="icon-btn" onclick="viewSavedPedido('${p.id}','${p.numero}','${cli}','${p.data_entrega||''}')">ðŸ‘ Ver</button>
-          <button class="icon-btn${fin?'':' danger'}" onclick="deletePedido('${p.id}','${p.numero}')">ðŸ—‘ Remover</button>
+          <button class="icon-btn" onclick="viewSavedPedido('${p.id}','${p.numero}','${cli}','${p.data_entrega||''}')">👁 Ver</button>
+          <button class="icon-btn${fin?'':' danger'}" onclick="deletePedido('${p.id}','${p.numero}')">🗑 Remover</button>
         </div></td>
       </tr>`;
     });
@@ -1137,7 +1137,7 @@ async function viewSavedPedido(id,numero,cliente,dataEntrega){
     document.getElementById('pedidoNum').textContent=baseNum;
     document.getElementById('pedidoBaseDisp').textContent=baseNum;
     document.getElementById('pedidoItemInput').value=itemNum;
-    document.getElementById('pedidoCli').textContent=cliente||'â€”';
+    document.getElementById('pedidoCli').textContent=cliente||'—';
     document.getElementById('filterBar').style.display='flex';document.getElementById('saveBtn').disabled=false;
     setFlag('saved');document.getElementById('statusBadge').textContent='VISUALIZANDO';document.getElementById('statusBadge').className='status-badge ok';
     renderResult();
@@ -1145,7 +1145,7 @@ async function viewSavedPedido(id,numero,cliente,dataEntrega){
 }
 
 async function deletePedido(id,numero){
-  if(!confirm(`Remover pedido NÂº ${numero} e todos os seus dados?`))return;
+  if(!confirm(`Remover pedido Nº ${numero} e todos os seus dados?`))return;
   try{
     const comps=await dbGet('componentes',`select=id&pedido_id=eq.${id}`);
     if(comps?.length){await dbDelete('operacoes',`componente_id=in.(${comps.map(c=>c.id).join(',')})`);await dbDelete('componentes',`pedido_id=eq.${id}`);}
@@ -1153,7 +1153,7 @@ async function deletePedido(id,numero){
   }catch(e){toast('Erro: '+e.message,'error');}
 }
 
-// â”€â”€ CONTROLE DE PRODUÃ‡ÃƒO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── CONTROLE DE PRODUÇÃO ──────────────────────────────────────────────────────
 async function loadControle(){
   const area=document.getElementById('controleArea');
   area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Carregando...</div></div>';
@@ -1165,22 +1165,22 @@ async function loadControle(){
       const fin=!!p.finalizado;
       const cls=entregaCls(p.data_entrega);
       let badge='',cardCls='';
-      if(fin){badge=`<span class="ctrl-badge ctrl-badge-done">âœ“ ConcluÃ­do</span>`;cardCls='cl-done';}
+      if(fin){badge=`<span class="ctrl-badge ctrl-badge-done">✓ Concluído</span>`;cardCls='cl-done';}
       else if(!p.data_entrega){badge=`<span class="ctrl-badge ctrl-badge-none">Sem prazo</span>`;cardCls='';}
-      else if(cls==='late'){badge=`<span class="ctrl-badge ctrl-badge-late">âš  Vencido</span>`;cardCls='cl-late';}
-      else if(cls==="warn"){badge=`<span class="ctrl-badge ctrl-badge-warn">âš¡ Urgente</span>`;cardCls="cl-warn";}
-      else if(cls==="blue"){badge=`<span class="ctrl-badge ctrl-badge-blue">ðŸ“… No prazo</span>`;cardCls="cl-blue";}
-      else{badge=`<span class="ctrl-badge ctrl-badge-ok">âœ“ No prazo</span>`;cardCls='cl-ok';}
+      else if(cls==='late'){badge=`<span class="ctrl-badge ctrl-badge-late">⚠ Vencido</span>`;cardCls='cl-late';}
+      else if(cls==="warn"){badge=`<span class="ctrl-badge ctrl-badge-warn">⚡ Urgente</span>`;cardCls="cl-warn";}
+      else if(cls==="blue"){badge=`<span class="ctrl-badge ctrl-badge-blue">📅 No prazo</span>`;cardCls="cl-blue";}
+      else{badge=`<span class="ctrl-badge ctrl-badge-ok">✓ No prazo</span>`;cardCls='cl-ok';}
       html+=`<div class="ctrl-card ${cardCls}" id="cc-${p.id}">
         <div class="ctrl-header" onclick="toggleControleCard('${p.id}')">
-          <span class="ctrl-tog" id="ct-${p.id}">â–¶</span>
+          <span class="ctrl-tog" id="ct-${p.id}">▶</span>
           <div style="flex:1;min-width:0">
             <div class="ctrl-num">${p.numero}</div>
-            <div class="ctrl-cli">${p.cliente||'â€”'}</div>
+            <div class="ctrl-cli">${p.cliente||'—'}</div>
           </div>
           ${badge}
-          <button class="btn-finalizar" onclick="event.stopPropagation();imprimirPedido('${p.id}','${p.numero}','${(p.cliente||'').replace(/'/g,"\\'")}','${p.data_entrega||''}',${fin})" style="border-color:rgba(59,111,212,.4);color:#3B6FD4">ðŸ–¨ Imprimir</button>
-                           <button class="btn-finalizar${fin?' done':''}" onclick="event.stopPropagation();toggleFinalizado('${p.id}',${fin})">${fin?'â†© Reabrir':'âœ“ Finalizar'}</button>
+          <button class="btn-finalizar" onclick="event.stopPropagation();imprimirPedido('${p.id}','${p.numero}','${(p.cliente||'').replace(/'/g,"\\'")}','${p.data_entrega||''}',${fin})" style="border-color:rgba(59,111,212,.4);color:#3B6FD4">🖨 Imprimir</button>
+                           <button class="btn-finalizar${fin?' done':''}" onclick="event.stopPropagation();toggleFinalizado('${p.id}',${fin})">${fin?'↩ Reabrir':'✓ Finalizar'}</button>
         </div>
         <div class="ctrl-body" id="cb-${p.id}"></div>
       </div>`;
@@ -1192,7 +1192,7 @@ async function loadControle(){
 async function toggleFinalizado(id,atual){
   try{
     await dbPatch('pedidos',`id=eq.${id}`,{finalizado:!atual});
-    toast(atual?'Pedido reaberto':'Pedido marcado como concluÃ­do',atual?'warn':'success');
+    toast(atual?'Pedido reaberto':'Pedido marcado como concluído',atual?'warn':'success');
     loadControle();
   }catch(e){toast('Erro: '+e.message,'error');}
 }
@@ -1202,8 +1202,8 @@ async function toggleControleCard(pedidoId){
   const tog=document.getElementById('ct-'+pedidoId);
   if(!body)return;
   const isOpen=body.style.display==='block';
-  if(isOpen){body.style.display='none';tog.textContent='â–¶';tog.classList.remove('open');return;}
-  tog.textContent='â–¼';tog.classList.add('open');body.style.display='block';
+  if(isOpen){body.style.display='none';tog.textContent='▶';tog.classList.remove('open');return;}
+  tog.textContent='▼';tog.classList.add('open');body.style.display='block';
   if(body.dataset.loaded)return;
   body.innerHTML='<div style="padding:14px 16px;color:var(--tx3);font-size:12px">Carregando itens...</div>';
   try{
@@ -1212,22 +1212,22 @@ async function toggleControleCard(pedidoId){
     const opsMap={};(ops||[]).forEach(o=>{if(!opsMap[o.componente_id])opsMap[o.componente_id]=[];opsMap[o.componente_id].push(o);});
     if(!comps?.length){body.innerHTML='<div style="padding:14px 16px;color:var(--tx3);font-size:12px">Sem itens cadastrados</div>';body.dataset.loaded='1';return;}
     let html=`<table class="ops-table" style="min-width:620px">
-      <thead><tr><th>POS.</th><th>CÃ“DIGO</th><th>DESCRIÃ‡ÃƒO</th><th>OP</th><th>ATUAL</th><th>ENTREGA</th><th>QTD</th></tr></thead><tbody>`;
+      <thead><tr><th>POS.</th><th>CÓDIGO</th><th>DESCRIÇÃO</th><th>OP</th><th>ATUAL</th><th>ENTREGA</th><th>QTD</th></tr></thead><tbody>`;
     comps.forEach(c=>{
       const cOps=normalizarSituacoes((opsMap[c.id]||[]).map(o=>({est:o.est,seq:o.seq,op:o.operacao,desc:o.descricao,situacao:o.situacao,inicio_data:o.inicio_data||''})));
       const ultima=getUltimaOp(cOps);
-      const qty=c.quantidade?(parseFloat(c.quantidade)%1===0?parseInt(c.quantidade):parseFloat(c.quantidade)):'â€”';
+      const qty=c.quantidade?(parseFloat(c.quantidade)%1===0?parseInt(c.quantidade):parseFloat(c.quantidade)):'—';
       const eCls=entregaCls(c.data_entrega);
       const entregaCell=c.data_entrega
         ?`<span class="entrega-badge entrega-${eCls||'ok'}" style="font-weight:700">${fmtDate(c.data_entrega)}</span>`
-        :'â€”';
+        :'—';
       const rowCls=c.data_entrega?(eCls==='late'?'row-vencida':eCls==='warn'?'row-warn':eCls==='blue'?'row-blue':'row-ok'):'';
       html+=`<tr class="${rowCls}">
         <td style="font-weight:700">${c.posicao}</td>
         <td>${c.codigo}</td>
         <td style="white-space:normal;max-width:220px;font-weight:500">${c.descricao}</td>
         <td style="font-family:var(--mono);font-size:10px;font-weight:700">${ultima.op}</td>
-        <td>${ultima.cls==='op-none'?'â€”':`<span class="op-badge ${ultima.cls}" style="font-size:9px">${ultima.label}</span>`}</td>
+        <td>${ultima.cls==='op-none'?'—':`<span class="op-badge ${ultima.cls}" style="font-size:9px">${ultima.label}</span>`}</td>
         <td>${entregaCell}</td>
         <td>${qty}</td>
       </tr>`;
@@ -1405,7 +1405,7 @@ async function imprimirPedido(id,numero,cliente,dataEntrega,finalizado){
 }
 
 
-// â”€â”€ ADMIN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── ADMIN ─────────────────────────────────────────────────────────────────────
 let usersData=[];
 async function loadUserList(){
   if(!requireAdmin()) return;
@@ -1413,31 +1413,31 @@ async function loadUserList(){
   area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Carregando...</div></div>';
   try{
     const users=await dbGet('usuarios','select=*&order=criado_em.asc');usersData=users||[];
-    if(!usersData.length){area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Nenhum usuÃ¡rio</div></div>';return;}
+    if(!usersData.length){area.innerHTML='<div class="empty-state" style="height:200px"><div class="empty-title">Nenhum usuário</div></div>';return;}
     let html='';
     usersData.forEach((u,idx)=>{
       const ini=u.nome.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();const cor=u.cor||'#4f8ef7';
       const perfilCls=u.perfil==='Admin'?'perfil-admin':'perfil-func';
       const ativoBadge=u.ativo?`<span class="badge-ativo">Ativo</span>`:`<span class="badge-inativo">Inativo</span>`;
-      const expira=u.expira_em?new Date(u.expira_em).toLocaleDateString('pt-BR'):'â€”';
+      const expira=u.expira_em?new Date(u.expira_em).toLocaleDateString('pt-BR'):'—';
       const isMe=currentUser&&u.id===currentUser.id;
       html+=`<div class="urow${u.ativo?'':' u-inactive'}">
         <div class="uav" style="background:${cor}">${ini}</div>
         <div class="uinfo">
-          <div class="uname">${u.nome}<span class="uperfil ${perfilCls}">${u.perfil}</span>${isMe?' <span style="font-size:10px;color:var(--tx3)">(vocÃª)</span>':''}</div>
-          <div class="umeta">${u.username} Â· expira: ${expira}</div>
+          <div class="uname">${u.nome}<span class="uperfil ${perfilCls}">${u.perfil}</span>${isMe?' <span style="font-size:10px;color:var(--tx3)">(você)</span>':''}</div>
+          <div class="umeta">${u.username} · expira: ${expira}</div>
         </div>
         ${ativoBadge}
         <div style="display:flex;gap:6px">
-          <button class="icon-btn" onclick="openUserModal(${idx})">âœŽ Editar</button>
+          <button class="icon-btn" onclick="openUserModal(${idx})">✎ Editar</button>
           <button class="icon-btn ${u.ativo&&!isMe?'danger':''}" onclick="toggleUserAtivo('${u.id}',${u.ativo},'${u.nome.replace(/'/g,"\\'")}',${isMe})" ${isMe?'disabled':''}>
-            ${u.ativo?'âŠ— Desativar':'âœ“ Ativar'}
+            ${u.ativo?'⊗ Desativar':'✓ Ativar'}
           </button>
         </div>
       </div>`;
     });
     area.innerHTML=html;
-  }catch(e){area.innerHTML=`<div class="empty-state" style="height:200px"><div class="empty-title">Erro</div><div class="empty-sub">${e.message}<br>Configure as polÃ­ticas RLS da tabela usuarios</div></div>`;}
+  }catch(e){area.innerHTML=`<div class="empty-state" style="height:200px"><div class="empty-title">Erro</div><div class="empty-sub">${e.message}<br>Configure as políticas RLS da tabela usuarios</div></div>`;}
 }
 function toggleExpiraField(){document.getElementById('expiraField').style.display=document.getElementById('mPerfil').value==='Admin'?'none':'block';}
 function openUserModal(idx){
@@ -1445,13 +1445,13 @@ function openUserModal(idx){
   document.getElementById('userModal').style.display='flex';
   document.getElementById('senhaHint').style.display=user?'inline':'none';
   if(user){
-    document.getElementById('modalTitle').textContent='Editar UsuÃ¡rio';document.getElementById('modalUserId').value=user.id;
+    document.getElementById('modalTitle').textContent='Editar Usuário';document.getElementById('modalUserId').value=user.id;
     document.getElementById('mNome').value=user.nome||'';document.getElementById('mUsername').value=user.username||'';
     document.getElementById('mSenha').value='';document.getElementById('mPerfil').value=user.perfil||'Funcionario';
     document.getElementById('mCor').value=user.cor||'#4f8ef7';
     document.getElementById('mExpira').value=user.expira_em?new Date(user.expira_em).toISOString().split('T')[0]:'';
   }else{
-    document.getElementById('modalTitle').textContent='Novo UsuÃ¡rio';document.getElementById('modalUserId').value='';
+    document.getElementById('modalTitle').textContent='Novo Usuário';document.getElementById('modalUserId').value='';
     document.getElementById('mNome').value='';document.getElementById('mUsername').value='';
     document.getElementById('mSenha').value='';document.getElementById('mPerfil').value='Funcionario';
     document.getElementById('mCor').value='#4f8ef7';document.getElementById('mExpira').value='';
@@ -1465,17 +1465,17 @@ async function saveUser(){
   const uname=document.getElementById('mUsername').value.trim(),senha=document.getElementById('mSenha').value;
   const perfil=document.getElementById('mPerfil').value,cor=document.getElementById('mCor').value;
   const expira=document.getElementById('mExpira').value;
-  if(!nome||!uname){toast('Nome e usuÃ¡rio sÃ£o obrigatÃ³rios','error');return;}
-  if(!id&&!senha){toast('Senha obrigatÃ³ria para novo usuÃ¡rio','error');return;}
+  if(!nome||!uname){toast('Nome e usuário são obrigatórios','error');return;}
+  if(!id&&!senha){toast('Senha obrigatória para novo usuário','error');return;}
   const btn=document.getElementById('modalSaveBtn');btn.disabled=true;btn.textContent='Salvando...';
   try{
     const body={nome,username:uname,perfil,cor,expira_em:(perfil==='Admin'||!expira)?null:new Date(expira+'T23:59:59').toISOString()};
     if(senha)body.senha_hash=senha;
-    if(id){await dbPatch('usuarios',`id=eq.${id}`,body);toast('UsuÃ¡rio atualizado','success');
+    if(id){await dbPatch('usuarios',`id=eq.${id}`,body);toast('Usuário atualizado','success');
       if(currentUser&&id===currentUser.id){setSession({...currentUser,nome:body.nome,perfil:body.perfil,cor:body.cor});
         document.getElementById('userAv').textContent=body.nome.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
         document.getElementById('userAv').style.background=body.cor;document.getElementById('userName').textContent=body.nome;document.getElementById('userRole').textContent=body.perfil;}
-    }else{body.ativo=true;await dbPost('usuarios',body);toast('UsuÃ¡rio criado','success');}
+    }else{body.ativo=true;await dbPost('usuarios',body);toast('Usuário criado','success');}
     closeUserModal();loadUserList();
   }catch(e){toast('Erro: '+e.message,'error');}
   finally{btn.disabled=false;btn.textContent='Salvar';}
@@ -1484,27 +1484,27 @@ async function toggleUserAtivo(id,ativo,nome,isMe){
   if(!requireAdmin()) return;
   if(isMe)return;const novoAtivo=!ativo;
   if(!confirm(`${novoAtivo?'Ativar':'Desativar'} "${nome}"?`))return;
-  try{await dbPatch('usuarios',`id=eq.${id}`,{ativo:novoAtivo});toast(`UsuÃ¡rio ${novoAtivo?'ativado':'desativado'}`,novoAtivo?'success':'warn');loadUserList();}
+  try{await dbPatch('usuarios',`id=eq.${id}`,{ativo:novoAtivo});toast(`Usuário ${novoAtivo?'ativado':'desativado'}`,novoAtivo?'success':'warn');loadUserList();}
   catch(e){toast('Erro: '+e.message,'error');}
 }
 
-// â”€â”€ RESET â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── RESET ─────────────────────────────────────────────────────────────────────
 function resetAll(){
   state={pedido:'',pedidoSeq:'',cliente:'',componentes:[]};existingPedidoId=null;filterMode='all';searchTerm='';activeOps=new Set();
   document.querySelectorAll('.chip-op').forEach(c=>c.classList.remove('active'));
   document.getElementById('pedidoPanel').style.display='none';document.getElementById('fileTag').style.display='none';
   document.getElementById('fileInput').value='';document.getElementById('filterBar').style.display='none';
-  document.getElementById('saveBtn').disabled=true;document.getElementById('saveBtn').innerHTML='<span>â–¶</span> Salvar no banco';
+  document.getElementById('saveBtn').disabled=true;document.getElementById('saveBtn').innerHTML='<span>▶</span> Salvar no banco';
   document.getElementById('statComp').textContent='0';document.getElementById('statOps').textContent='0';
   document.getElementById('toolbarInfo').textContent='Nenhuma planilha importada';
   document.getElementById('statusBadge').textContent='AGUARDANDO';document.getElementById('statusBadge').className='status-badge';
   document.getElementById('emptyState').style.display='flex';document.getElementById('resultContent').style.display='none';document.getElementById('resultContent').innerHTML='';
   document.getElementById('searchInput').value='';document.getElementById('progressWrap').style.display='none';
-  document.getElementById('pedidoItemInput').value='';document.getElementById('pedidoBaseDisp').textContent='â€”';
+  document.getElementById('pedidoItemInput').value='';document.getElementById('pedidoBaseDisp').textContent='—';
   toast('Tudo limpo','warn');
 }
 
-// â”€â”€ TOAST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── TOAST ─────────────────────────────────────────────────────────────────────
 function toast(msg,type='info'){
   const stack=document.getElementById('toasts'),t=document.createElement('div');
   t.className='toast '+(type==='success'?'success':type==='error'?'error':type==='warn'?'warn':'');
@@ -1513,7 +1513,7 @@ function toast(msg,type='info'){
   setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},3500);
 }
 
-// â”€â”€ UPLOAD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── UPLOAD ────────────────────────────────────────────────────────────────────
 const zone=document.getElementById('uploadZone'),fi=document.getElementById('fileInput');
 zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
 zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
