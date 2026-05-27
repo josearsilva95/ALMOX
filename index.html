@@ -995,40 +995,23 @@ async function executeSave(){
 function normalizarSituacoes(ops){
   if(!ops||!ops.length)return ops;
 
-  // Divide em BLOCOS: quando a seq reinicia (desce) ou o EST muda → novo bloco.
-  // Isso resolve casos onde o mesmo EST aparece múltiplas vezes com seq reiniciando
-  // (ex: 10,20,30...90 → 10,20,30... do mesmo EST para peças diferentes).
-  const blocos=[];
-  let blocoAtual=[];
-  let prevSeq=-1,prevEst=null;
-  ops.forEach(function(o){
-    const seq=parseInt(o.seq)||0;
-    const est=String(o.est||'_');
-    if(est!==prevEst||(prevSeq>0&&seq<=prevSeq)){
-      if(blocoAtual.length)blocos.push(blocoAtual);
-      blocoAtual=[];
+  // Usa POSIÇÃO NA LISTA como critério — qualquer op que vem antes
+  // da última com apontamento real é Concluída (se tiver data) ou Não Apontado (se não tiver).
+  // Isso cobre: ops fora de ordem de seq, blocos múltiplos do mesmo EST,
+  // e ops com seq alto que vieram antes na lista (ex: SEQ 80 antes de SEQ 10).
+  let ultimaIdx=-1;
+  ops.forEach(function(o,i){
+    if(o.inicio_data&&o.inicio_data!=='')ultimaIdx=i;
+  });
+  if(ultimaIdx===-1)return ops;
+
+  return ops.map(function(o,i){
+    if(i<ultimaIdx){
+      const temData=o.inicio_data&&o.inicio_data!=='';
+      return Object.assign({},o,{situacao:temData?'Concluida':'NaoApontado'});
     }
-    blocoAtual.push(o);
-    prevSeq=seq;prevEst=est;
+    return o;
   });
-  if(blocoAtual.length)blocos.push(blocoAtual);
-
-  // Processa cada bloco independentemente
-  const resultado=[];
-  blocos.forEach(function(bloco){
-    const comInicio=bloco.filter(function(o){return o.inicio_data&&o.inicio_data!=='';});
-    if(!comInicio.length){bloco.forEach(function(o){resultado.push(o);});return;}
-    const ultimaSeq=Math.max.apply(null,comInicio.map(function(o){return parseInt(o.seq)||0;}));
-    bloco.forEach(function(o){
-      const seq=parseInt(o.seq)||0;
-      if(seq<ultimaSeq){
-        const temData=o.inicio_data&&o.inicio_data!=='';
-        resultado.push(Object.assign({},o,{situacao:temData?'Concluida':'NaoApontado'}));
-      }else{resultado.push(o);}
-    });
-  });
-
-  return resultado;
 }
 
 function getUltimaOp(ops){
