@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>PCP · ALMOX</title>
+<title>Controle de Produção</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -197,7 +197,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ops-table td:last-child{border-right:none;}.ops-table tr:last-child td{border-bottom:none;}
 .ops-table tbody tr:hover td{background:var(--blue-light);}
 .sit-badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:600;}
-.sit-a{background:var(--amber-bg);color:var(--amber);}.sit-c{background:var(--green-bg);color:var(--green);}.sit-p{background:#d4f5e2;color:#1a7a45;}
+.sit-a{background:var(--amber-bg);color:var(--amber);}.sit-c{background:var(--green-bg);color:var(--green);}.sit-p{background:#d4f5e2;color:#1a7a45;}.sit-n{background:#F0F1F5;color:#8A92A8;border:1px solid rgba(138,146,168,.25);font-style:italic;}
 
 /* ── PEDIDOS SALVOS ── */
 .saved-layout{width:100%;padding:20px;overflow-y:auto;}
@@ -358,7 +358,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 
 <!-- LOADING -->
 <div id="loadingScreen">
-  <div class="ld-title">PCP · ALMOX</div>
+  <div class="ld-title">Controle de Produção</div>
   <div class="ld-sub">Sistema de Produção</div>
   <div class="ld-bar"><div class="ld-bar-fill" id="ldFill"></div></div>
   <div class="ld-status" id="ldStatus">inicializando...</div>
@@ -373,7 +373,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
           <circle cx="11" cy="11" r="2" fill="#fff" stroke="none"/>
         </svg>
       </div>
-      <div class="login-t">PCP · ALMOX</div>
+      <div class="login-t">Controle de Produção</div>
     </div>
     <div class="login-st">Sistema de Produção</div>
     <div class="login-err" id="loginErr"></div>
@@ -401,7 +401,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 <div class="topbar">
   <div class="topbar-left">
     <div class="logo-circle">S</div>
-    <div><div class="topbar-title">PCP · ALMOX</div><div class="topbar-sub">Extrator de Ordens de Produção</div></div>
+    <div><div class="topbar-title">Controle de Produção</div><div class="topbar-sub">Sistema de Acompanhamento</div></div>
   </div>
   <div class="topbar-right">
     <div class="db-indicator">
@@ -994,14 +994,41 @@ async function executeSave(){
 
 function normalizarSituacoes(ops){
   if(!ops||!ops.length)return ops;
-  const comInicio=ops.filter(function(o){return o.inicio_data&&o.inicio_data!=='';});
-  if(!comInicio.length)return ops;
-  const ultimaSeq=Math.max.apply(null,comInicio.map(function(o){return parseInt(o.seq)||0;}));
-  return ops.map(function(o){
+
+  // Divide em BLOCOS: quando a seq reinicia (desce) ou o EST muda → novo bloco.
+  // Isso resolve casos onde o mesmo EST aparece múltiplas vezes com seq reiniciando
+  // (ex: 10,20,30...90 → 10,20,30... do mesmo EST para peças diferentes).
+  const blocos=[];
+  let blocoAtual=[];
+  let prevSeq=-1,prevEst=null;
+  ops.forEach(function(o){
     const seq=parseInt(o.seq)||0;
-    if(seq<ultimaSeq)return Object.assign({},o,{situacao:'Concluida'});
-    return o;
+    const est=String(o.est||'_');
+    if(est!==prevEst||(prevSeq>0&&seq<=prevSeq)){
+      if(blocoAtual.length)blocos.push(blocoAtual);
+      blocoAtual=[];
+    }
+    blocoAtual.push(o);
+    prevSeq=seq;prevEst=est;
   });
+  if(blocoAtual.length)blocos.push(blocoAtual);
+
+  // Processa cada bloco independentemente
+  const resultado=[];
+  blocos.forEach(function(bloco){
+    const comInicio=bloco.filter(function(o){return o.inicio_data&&o.inicio_data!=='';});
+    if(!comInicio.length){bloco.forEach(function(o){resultado.push(o);});return;}
+    const ultimaSeq=Math.max.apply(null,comInicio.map(function(o){return parseInt(o.seq)||0;}));
+    bloco.forEach(function(o){
+      const seq=parseInt(o.seq)||0;
+      if(seq<ultimaSeq){
+        const temData=o.inicio_data&&o.inicio_data!=='';
+        resultado.push(Object.assign({},o,{situacao:temData?'Concluida':'NaoApontado'}));
+      }else{resultado.push(o);}
+    });
+  });
+
+  return resultado;
 }
 
 function getUltimaOp(ops){
@@ -1009,7 +1036,11 @@ function getUltimaOp(ops){
   const norm=normalizarSituacoes(ops);
   const comInicio=norm.filter(function(o){return o.inicio_data&&o.inicio_data!=='';});
   if(comInicio.length){
-    const ultima=comInicio.sort(function(a,b){return parseInt(b.seq)-parseInt(a.seq);})[0];
+    // Pega a última op apontada pela posição original na lista (não só pelo seq,
+    // pois vários EST podem ter o mesmo seq)
+    const indices=comInicio.map(function(o){return norm.indexOf(o);});
+    const maxIdx=Math.max.apply(null,indices);
+    const ultima=norm[maxIdx];
     const isConcluida=/concl|finaliz/i.test(ultima.situacao||'');
     return{label:ultima.desc||ultima.op,cls:isConcluida?'op-concluida':'op-andamento',op:ultima.op||'—'};
   }
@@ -1052,6 +1083,7 @@ function renderResult(){
     const opsHtml=opsNorm&&opsNorm.length?opsNorm.map(op=>{
       const s=(op.situacao||'').toLowerCase();let cls='sit-a',sitLabel='Aberta';
       if(/concl|finaliz/i.test(s)){cls='sit-c';sitLabel='Concluída';}
+      else if(s==='naoapontado'){cls='sit-n';sitLabel='Não Apontado';}
       else if(op.inicio_data&&op.inicio_data!==''){cls='sit-p';sitLabel='Em Processo';}
       return`<tr><td>${op.est||'—'}</td><td>${op.seq||'—'}</td><td>${op.op||'—'}</td><td>${op.desc||'—'}</td><td>${op.qtd_prev||'—'}</td><td>${op.qtd_real||'—'}</td><td>${op.inicio_data?op.inicio_data+' '+op.inicio_hora:'—'}</td><td><span class="sit-badge ${cls}">${sitLabel}</span></td></tr>`;
     }).join(''):`<tr><td colspan="8" style="padding:12px;text-align:center;color:var(--tx3);font-size:11px">Sem operações</td></tr>`;
@@ -1315,14 +1347,14 @@ async function imprimirExtrator(){
   const w=window.open('','_blank','width=1100,height=800');
   const d=w.document;d.open();
   d.write('<!DOCTYPE html><html><head><meta charset="UTF-8">');
-  d.write('<title>Pedido '+state.pedidoSeq+' - PCP ALMOX</title>');
+  d.write('<title>Pedido '+state.pedidoSeq+' - Controle de Produção</title>');
   d.write('<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:12px;color:#1C2333;background:#fff;padding:24px}@media print{.no-print{display:none}@page{margin:15mm}}</style>');
   d.write('</head><body>');
   d.write('<div class="no-print" style="margin-bottom:16px;display:flex;gap:8px">');
   d.write('<button onclick="window.print()" style="padding:8px 20px;background:#3B6FD4;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Imprimir</button> ');
   d.write('<button onclick="window.close()" style="padding:8px 16px;background:#f0f4fd;color:#5A6580;border:1px solid #dde3ee;border-radius:6px;font-size:13px;cursor:pointer">Fechar</button></div>');
   d.write('<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #1A2340">');
-  d.write('<div><div style="font-size:11px;color:#9AA3B8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">PCP ALMOX - Extrator</div>');
+  d.write('<div><div style="font-size:11px;color:#9AA3B8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Controle de Produção</div>');
   d.write('<div style="font-size:22px;font-weight:700;color:#1A2340;font-family:monospace">Pedido '+(state.pedidoSeq||'-')+'</div>');
   d.write('<div style="font-size:13px;color:#5A6580;margin-top:4px">'+(state.cliente||'-')+'</div>');
   d.write('<div style="margin-top:6px;font-size:10px;background:#EBF0FB;color:#3B6FD4;display:inline-block;padding:2px 10px;border-radius:20px;font-weight:600">Filtro: '+filtroDesc+'</div></div>');
@@ -1337,7 +1369,7 @@ async function imprimirExtrator(){
   d.write('<th style="padding:8px;border:1px solid #2d3a55;color:rgba(255,255,255,.7);font-size:9px;text-align:left">ENTREGA</th>');
   d.write('<th style="padding:8px;border:1px solid #2d3a55;color:rgba(255,255,255,.7);font-size:9px;text-align:center">QTD</th>');
   d.write('</tr></thead><tbody>'+linhas+'</tbody></table>');
-  d.write('<div style="margin-top:20px;font-size:9px;color:#9AA3B8;text-align:right">'+filtered.length+' itens - PCP ALMOX</div>');
+  d.write('<div style="margin-top:20px;font-size:9px;color:#9AA3B8;text-align:right">'+filtered.length+' itens - Controle de Produção</div>');
   d.write('</body></html>');d.close();
 }
 
@@ -1399,14 +1431,14 @@ async function imprimirPedido(id,numero,cliente,dataEntrega,finalizado){
     const w=window.open('','_blank','width=1100,height=800');
     const d=w.document;d.open();
     d.write('<!DOCTYPE html><html><head><meta charset="UTF-8">');
-    d.write('<title>Pedido '+numero+' - PCP ALMOX</title>');
+    d.write('<title>Pedido '+numero+' - Controle de Produção</title>');
     d.write('<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:12px;color:#1C2333;background:#fff;padding:24px}@media print{.no-print{display:none}@page{margin:15mm}}</style>');
     d.write('</head><body>');
     d.write('<div class="no-print" style="margin-bottom:16px;display:flex;gap:8px">');
     d.write('<button onclick="window.print()" style="padding:8px 20px;background:#3B6FD4;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Imprimir</button> ');
     d.write('<button onclick="window.close()" style="padding:8px 16px;background:#f0f4fd;color:#5A6580;border:1px solid #dde3ee;border-radius:6px;font-size:13px;cursor:pointer">Fechar</button></div>');
     d.write('<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #1A2340">');
-    d.write('<div><div style="font-size:11px;color:#9AA3B8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">PCP ALMOX - Ordem de Producao</div>');
+    d.write('<div><div style="font-size:11px;color:#9AA3B8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Controle de Produção</div>');
     d.write('<div style="font-size:22px;font-weight:700;color:#1A2340;font-family:monospace">Pedido '+numero+'</div>');
     d.write('<div style="font-size:13px;color:#5A6580;margin-top:4px">'+(cliente||'-')+'</div></div>');
     d.write('<div style="text-align:right">');
@@ -1422,7 +1454,7 @@ async function imprimirPedido(id,numero,cliente,dataEntrega,finalizado){
     d.write('<th style="padding:8px;border:1px solid #2d3a55;color:rgba(255,255,255,.7);font-size:9px;text-align:left">ENTREGA</th>');
     d.write('<th style="padding:8px;border:1px solid #2d3a55;color:rgba(255,255,255,.7);font-size:9px;text-align:center">QTD</th>');
     d.write('</tr></thead><tbody>'+linhas+'</tbody></table>');
-    d.write('<div style="margin-top:20px;font-size:9px;color:#9AA3B8;text-align:right">'+(comps||[]).length+' itens - PCP ALMOX</div>');
+    d.write('<div style="margin-top:20px;font-size:9px;color:#9AA3B8;text-align:right">'+(comps||[]).length+' itens - Controle de Produção</div>');
     d.write('</body></html>');d.close();
   }catch(e){toast('Erro ao imprimir: '+e.message,'error');}
 }
